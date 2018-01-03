@@ -4,9 +4,9 @@
 */
 
 div#main-outer {
-    width: 300px;
-    margin: 5px;
-    background: #DDD;
+    width: 520px;
+    height: auto;
+    margin: 4px;
     border-radius: 5px;
 }
 

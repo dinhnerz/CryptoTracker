@@ -3,6 +3,10 @@
 ** description: custom styling for "html/options.html" file
 */
 
+/*div.coinbg:hover{
+	background-color: #D3D3D3;
+}*/
+
 div#options-outer {
     margin: 5px;
     background: #DDD;
