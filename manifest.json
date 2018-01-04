@@ -1,4 +1,4 @@
-// dinhnluong@gmail.com 01.03.2018
+// dinhnluong@gmail.com 01.04.2018
 
 {
 
@@ -6,25 +6,25 @@
     "version": "0.29",
     "manifest_version": 2,
 
-    "description": "Track your favorite Crypto currency coin!",
+    "description": "Track your favorite Crypto currency movement!",
     "icons": {
         "19": "images/cryptocoin.png",
         "38": "images/cryptocoin.png",
-        "128": "images/cryptocoin.png" //icon inside the chrome://extension
+        "128": "images/cryptocoin.png" 
     },
 
     "browser_action": {
         "default_title": "CryptoTrakker",
         "default_icon": {
-            "19": "images/cryptocoin.png", //chrome broswer icon
+            "19": "images/cryptocoin.png", 
             "38": "images/cryptocoin.png"
         },
         "default_popup": "html/main.html"
     },
 
-    //additional
+
     "options_page": "html/options.html",
-    "homepage_url": "https://github.com/dinhnerz/CryptoTrakker",
+    "homepage_url": "https://github.com/dinhnerz/CryptoTrakker#-cryptotrakker",
 
        "permissions": [
           "storage"
