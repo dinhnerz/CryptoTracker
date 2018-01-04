@@ -1,11 +1,11 @@
+// dinhnluong@gmail.com 01.03.2018
+
 {
-    //manifest spec: http://developer.chrome.com/extensions/manifest.html
-    //required
+
     "name": "CryptoTrakker",
-    "version": "0.23",
+    "version": "0.29",
     "manifest_version": 2,
 
-    //recommended
     "description": "Track your favorite Crypto currency coin!",
     "icons": {
         "19": "images/cryptocoin.png",
@@ -13,7 +13,6 @@
         "128": "images/cryptocoin.png" //icon inside the chrome://extension
     },
 
-    //required
     "browser_action": {
         "default_title": "CryptoTrakker",
         "default_icon": {
