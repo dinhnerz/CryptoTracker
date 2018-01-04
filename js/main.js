@@ -3,14 +3,17 @@
 var storageCache = {};
 var apiArray = [];
 
+var obData = []; 
+
 
 $(document).ready(function() { 
 
   chrome.storage.sync.get(null, function(data) {
 
-    storageCache = data;
+    storageCache = data; // data from chrome storage
 
-    console.log(storageCache)
+    // if crypto coin is selected, make sure we grab the api
+    // selected coins get pushed into an array to use for api
 
     if (storageCache.bitcoin == "on") {
       apiArray.push("bitcoin");
@@ -169,8 +172,10 @@ $(document).ready(function() {
       apiArray.push("factom");
     }
 
+
     for (i = 0; i < apiArray.length; i++) {
-      $.getJSON("https://api.coinmarketcap.com/v1/ticker/" + apiArray[i] + "/", function (data) {
+
+      $.getJSON("https://api.coinmarketcap.com/v1/ticker/" + apiArray[i] + "/").then(function (data) {
 
         var tableHTML = "";
 
@@ -178,9 +183,9 @@ $(document).ready(function() {
         tableHTML += "<td>" + data[0].symbol + "</td>";
         tableHTML += "<td>" + data[0].name +"</td>";
 
-        tableHTML += "<td>$" + data[0].price_usd; + "</td>";
+        var num = Number(data[0].price_usd);
 
-
+        tableHTML += "<td align=\"right\">$" + num.toLocaleString(undefined, {minimumFractionDigits: 3, maximumFractionDigits: 3}) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
 
         if (data[0].percent_change_24h > 0) {
           tableHTML += "<td><div style=\"color: green\"><img src=\"../images/uparrow.png\"> " + data[0].percent_change_24h + "%</td><tr>";
@@ -189,10 +194,11 @@ $(document).ready(function() {
           tableHTML += "<td><div style=\"color: red\"><img src=\"../images/downarrow.png\"> " + data[0].percent_change_24h + "%</td><tr>";
 
         }
-
+        
         $("#cryptoTable").append(tableHTML);
 
       });
+
 
     }
 
