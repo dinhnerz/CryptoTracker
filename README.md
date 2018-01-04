@@ -2,7 +2,7 @@
     <head>
     </head>
     <body>
-        <h2>CryptoTrakker</h2>
+        <div><img src="../images/cryptocoin.png" style="width: 50px; height: 50px"><h2>CryptoTrakker</h2></div>
         <div><b>Version:</b> 0.23</div>
         <div><b>Author:</b> Dinh Luong (dinhnluong@gmail.com)</div>
         <div><b>Updated:</b> 01.03.2018</div>
