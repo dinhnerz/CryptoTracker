@@ -4,7 +4,7 @@
 
     "name": "CryptoTrakker",
     "version": "0.34",
-    "manifest_version": 2.03,
+    "manifest_version": 2,
 
     "description": "Track your favorite Crypto currency movement!",
     "icons": {
