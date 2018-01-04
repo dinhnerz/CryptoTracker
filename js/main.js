@@ -1,4 +1,4 @@
-// dinhnluong@gmail.com 01.03.2018
+// dinhnluong@gmail.com 01.04.2018
 
 var storageCache = {};
 var apiArray = [];
@@ -177,8 +177,18 @@ $(document).ready(function() {
         tableHTML += "<tr><td><img src=\"../images/logo/" + data[0].id + ".png\"></td>";
         tableHTML += "<td>" + data[0].symbol + "</td>";
         tableHTML += "<td>" + data[0].name +"</td>";
-        tableHTML += "<td>$" + data[0].price_usd + "</td>";
-        tableHTML += "<td>" + data[0].percent_change_24h + "</td><tr>";
+
+        tableHTML += "<td>$" + data[0].price_usd; + "</td>";
+
+
+
+        if (data[0].percent_change_24h > 0) {
+          tableHTML += "<td><div style=\"color: green\"><img src=\"../images/uparrow.png\"> " + data[0].percent_change_24h + "%</td><tr>";
+
+        } else {
+          tableHTML += "<td><div style=\"color: red\"><img src=\"../images/downarrow.png\"> " + data[0].percent_change_24h + "%</td><tr>";
+
+        }
 
         $("#cryptoTable").append(tableHTML);
 
@@ -190,7 +200,7 @@ $(document).ready(function() {
   });
 
 
-  
+
 });
 
 
