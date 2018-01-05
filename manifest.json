@@ -10,7 +10,7 @@
     "icons": {
         "19": "images/cryptocoin.png",
         "38": "images/cryptocoin.png",
-        "128": "images/cryptocoin.png" 
+        "128": "images/cryptocoin.png"
     },
 
     "browser_action": {
@@ -26,7 +26,7 @@
     "options_page": "html/options.html",
     "homepage_url": "https://github.com/dinhnerz/CryptoTrakker#-cryptotrakker",
 
-       "permissions": [
+    "permissions": [ 
           "storage"
     ]
     
