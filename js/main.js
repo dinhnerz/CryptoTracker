@@ -1,9 +1,67 @@
-// dinhnluong@gmail.com 01.04.2018
+// dinhnluong@gmail.com 01.06.2018
 
 var storageCache = {};
 var apiArray = [];
-
 var obData = []; 
+
+var tableHTML = "";
+
+var settings = "";
+
+// add to this array, to add more cryptos to track
+
+var arrCoinDb = [{"storageName": "bitcoin", "pushName": "bitcoin"},
+{"storageName": "litecoin", "pushName": "litecoin"},
+{"storageName": "ripple", "pushName": "ripple"},
+{"storageName": "ethereum", "pushName": "ethereum"},
+{"storageName": "cardano", "pushName": "cardano"},
+{"storageName": "iota", "pushName": "iota"},
+{"storageName": "tron", "pushName": "tron"},
+{"storageName": "stellar", "pushName": "stellar"},
+{"storageName": "bitcoincash", "pushName": "bitcoin-cash"},
+{"storageName": "nem", "pushName": "nem"},
+{"storageName": "dash", "pushName": "dash"},
+{"storageName": "monero", "pushName": "monero"},
+{"storageName": "neo", "pushName": "neo"},
+{"storageName": "eos", "pushName": "eos"},
+{"storageName": "bitcoingold", "pushName": "bitcoin-gold"},
+{"storageName": "qtum", "pushName": "qtum"},
+{"storageName": "raiblocks", "pushName": "raiblocks"},
+{"storageName": "ethereumclassic", "pushName": "ethereum-classic"},
+{"storageName": "icon", "pushName": "icon"},
+{"storageName": "bitconnect", "pushName": "bitconnect"},
+{"storageName": "lisk", "pushName": "lisk"},
+{"storageName": "bitshares", "pushName": "bitshares"},
+{"storageName": "status", "pushName": "status"},
+{"storageName": "omisego", "pushName": "omisego"},
+{"storageName": "verge", "pushName": "verge"},
+{"storageName": "populous", "pushName": "populous"},
+{"storageName": "ardor", "pushName": "ardor"},
+{"storageName": "steem", "pushName": "steem"},
+{"storageName": "zcash", "pushName": "zcash"},
+{"storageName": "stratis", "pushName": "stratis"},
+{"storageName": "tether", "pushName": "tether"},
+{"storageName": "waves", "pushName": "waves"},
+{"storageName": "hshare", "pushName": "hshare"},
+{"storageName": "digibyte", "pushName": "digibyte"},
+{"storageName": "bytecoin", "pushName": "bytecoin-bcn"},
+{"storageName": "komodo", "pushName": "komodo"},
+{"storageName": "siacoin", "pushName": "siacoin"},
+{"storageName": "vechain", "pushName": "vechain"},
+{"storageName": "binancecoin", "pushName": "binance-coin"},
+{"storageName": "golem", "pushName": "golem-network-tokens"},
+{"storageName": "augur", "pushName": "augur"},
+{"storageName": "veritaseum", "pushName": "veritaseum"},
+{"storageName": "ark", "pushName": "ark"},
+{"storageName": "kucoinshares", "pushName": "kucoin-shares"},
+{"storageName": "decred", "pushName": "decred"},
+{"storageName": "basicattentiontoken", "pushName": "basic-attention-token"},
+{"storageName": "nxt", "pushName": "nxt"},
+{"storageName": "dragonchain", "pushName": "dragonchain"},
+{"storageName": "salt", "pushName": "salt"},
+{"storageName": "pivx", "pushName": "pivx"},
+{"storageName": "powerledger", "pushName": "power-ledger"},
+{"storageName": "factom", "pushName": "factom"}];
 
 
 $(document).ready(function() { 
@@ -13,201 +71,206 @@ $(document).ready(function() {
     storageCache = data; // data from chrome storage
 
     // if crypto coin is selected, make sure we grab the api
-    // selected coins get pushed into an array to use for api
+    // selected coins get added into an array to use for api
 
-    if (storageCache.bitcoin == "on") {
-      apiArray.push("bitcoin");
-    }
-    if (storageCache.litecoin == "on") {
-      apiArray.push("litecoin");
-    }
-    if (storageCache.ripple == "on") {
-      apiArray.push("ripple");
-    }
-    if (storageCache.ethereum == "on") {
-      apiArray.push("ethereum");
-    }
-    if (storageCache.cardano == "on") {
-      apiArray.push("cardano");
-    }
-    if (storageCache.iota == "on") {
-      apiArray.push("iota");
-    }
-    if (storageCache.tron == "on") {
-      apiArray.push("tron");
-    }
-    if (storageCache.stellar == "on") {
-      apiArray.push("stellar");
-    }
-    if (storageCache.bitcoincash == "on") {
-      apiArray.push("bitcoin-cash");
-    }
-    if (storageCache.qtum == "on") {
-      apiArray.push("qtum");
-    }
-    if (storageCache.bitcoingold == "on") {
-      apiArray.push("bitcoin-gold");
-    }
-    if (storageCache.eos == "on") {
-      apiArray.push("eos");
-    }
-    if (storageCache.neo == "on") {
-      apiArray.push("neo");
-    }
-    if (storageCache.dash == "on") {
-      apiArray.push("dash");
-    }
-    if (storageCache.monero == "on") {
-      apiArray.push("monero");
-    }
-    if (storageCache.nem == "on") {
-      apiArray.push("nem");
-    }
-    if (storageCache.ethereumclassic == "on") {
-      apiArray.push("ethereum-classic");
-    }
-    if (storageCache.raiblocks == "on") {
-      apiArray.push("raiblocks");
-    }
-    if (storageCache.icon == "on") {
-      apiArray.push("icon");
-    }
-    if (storageCache.bitconnect == "on") {
-      apiArray.push("bitconnect");
-    }
-    if (storageCache.lisk == "on") {
-      apiArray.push("lisk");
-    }
-    if (storageCache.bitshares == "on") {
-      apiArray.push("bitshares");
-    }
-    if (storageCache.status == "on") {
-      apiArray.push("status");
-    }
-    if (storageCache.omisego == "on") {
-      apiArray.push("omisego");
-    }
-    if (storageCache.verge == "on") {
-      apiArray.push("verge");
-    }
-    if (storageCache.populous == "on") {
-      apiArray.push("populous");
-    }
-    if (storageCache.ardor == "on") {
-      apiArray.push("ardor");
-    }
-    if (storageCache.steem == "on") {
-      apiArray.push("steem");
-    }
-    if (storageCache.zcash == "on") {
-      apiArray.push("zcash");
-    }
-    if (storageCache.stratis == "on") {
-      apiArray.push("stratis");
-    }
-    if (storageCache.tether == "on") {
-      apiArray.push("tether");
-    }
-    if (storageCache.waves == "on") {
-      apiArray.push("waves");
-    }
-    if (storageCache.bytecoin == "on") {
-      apiArray.push("bytecoin-bcn");
-    }
-    if (storageCache.hshare == "on") {
-      apiArray.push("hshare");
-    }
-    if (storageCache.komodo == "on") {
-      apiArray.push("komodo");
-    }
-    if (storageCache.siacoin == "on") {
-      apiArray.push("siacoin");
-    }
-    if (storageCache.vechain == "on") {
-      apiArray.push("vechain");
-    }
-    if (storageCache.binancecoin == "on") {
-      apiArray.push("binance-coin");
-    }
-    if (storageCache.golem == "on") {
-      apiArray.push("golem");
-    }
-    if (storageCache.augur == "on") {
-      apiArray.push("augur");
-    }
-    if (storageCache.digibyte == "on") {
-      apiArray.push("digibyte");
-    }
-    if (storageCache.veritaseum == "on") {
-      apiArray.push("veritaseum");
-    }
-    if (storageCache.ark == "on") {
-      apiArray.push("ark");
-    }
-    if (storageCache.kucoinshares == "on") {
-      apiArray.push("kucoin-shares");
-    }
-    if (storageCache.decred == "on") {
-      apiArray.push("decred");
-    }
-    if (storageCache.basicattentiontoken == "on") {
-      apiArray.push("basic-attention-token");
-    }
-    if (storageCache.nxt == "on") {
-      apiArray.push("nxt");
-    }
-    if (storageCache.dragonchain == "on") {
-      apiArray.push("dragonchain");
-    }
-    if (storageCache.salt == "on") {
-      apiArray.push("salt");
-    }
-    if (storageCache.powerledger == "on") {
-      apiArray.push("power-ledger");
-    }
-    if (storageCache.pivx == "on") {
-      apiArray.push("pivx");
-    }
-    if (storageCache.factom == "on") {
-      apiArray.push("factom");
+    for (var n = 0; n < arrCoinDb.length; n++) {
+
+      if (storageCache[arrCoinDb[n].storageName] == "on" ) {
+
+        apiArray.push(arrCoinDb[n].pushName);
+
+      }
+
     }
 
 
-    for (i = 0; i < apiArray.length; i++) {
+var done = apiArray.length; // number of json requests
 
-      $.getJSON("https://api.coinmarketcap.com/v1/ticker/" + apiArray[i] + "/").then(function (data) {
+$(apiArray).each(function() {
 
-        var tableHTML = "";
+  var number = this;
 
-        tableHTML += "<tr><td><img src=\"../images/logo/" + data[0].id + ".png\"></td>";
-        tableHTML += "<td>" + data[0].symbol + "</td>";
-        tableHTML += "<td>" + data[0].name +"</td>";
+  $.getJSON("https://api.coinmarketcap.com/v1/ticker/" + number + "/", function(data) {
 
-        var num = Number(data[0].price_usd);
+   tableHTML = "";
 
-        tableHTML += "<td align=\"right\">$" + num.toLocaleString(undefined, {minimumFractionDigits: 3, maximumFractionDigits: 3}) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+   tableHTML += "<tr><td><img src=\"../images/logo/" + data[0].id + ".png\"></td>";
+   tableHTML += "<td>" + data[0].symbol + "</td>";
+   tableHTML += "<td>" + data[0].name +"</td>";
 
-        if (data[0].percent_change_24h > 0) {
-          tableHTML += "<td><div style=\"color: green\"><img src=\"../images/uparrow.png\"> " + data[0].percent_change_24h + "%</td><tr>";
+   var num = Number(data[0].price_usd);
 
-        } else {
-          tableHTML += "<td><div style=\"color: red\"><img src=\"../images/downarrow.png\"> " + data[0].percent_change_24h + "%</td><tr>";
+   tableHTML += "<td align=\"right\">$" + num.toLocaleString(undefined, {minimumFractionDigits: 3, maximumFractionDigits: 3}) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+
+   if (data[0].percent_change_24h > 0) {
+    tableHTML += "<td><div style=\"color: green\"><img src=\"../images/uparrow.png\"> " + data[0].percent_change_24h + "%</td><tr>";
+
+  } else {
+    tableHTML += "<td><div style=\"color: red\"><img src=\"../images/downarrow.png\"> " + data[0].percent_change_24h + "%</td><tr>";
+
+  }
+
+  obData.push({ "name": data[0].name,
+    "rank": data[0].rank,
+    "price": data[0].price_usd,
+    "change": data[0].percent_change_24h,
+    "html": tableHTML});
+
+  $("#cryptoTable").append(tableHTML);
+
+
+  done -= 1;
+
+  if(done == 0) {
+
+
+    if (storageCache.display == "name" && storageCache.style == "desending" || storageCache.name == null) {
+
+        if (storageCache.name == "off")  {
+
+          chrome.storage.sync.set({"name": "on"}, null);
+
+        } else if (storageCache.name == "name" && storageCache.style == "asending" ) {
+
+          chrome.storage.sync.set({"name": "off"}, null);
 
         }
-        
-        $("#cryptoTable").append(tableHTML);
-
-      });
 
 
+    sortDisplay("name");
+
+    } else if (storageCache.display == "price") {
+        if (storageCache.price == "off")  {
+
+                  chrome.storage.sync.set({"price": "on"}, null);
+
+        }
+    sortDisplay("price");
+    } else if (storageCache.display == "change") {
+
+   
+    sortDisplay("change");
+    } else if (storageCache.display == "rank") {
+
+    sortDisplay("rank");
     }
 
-
-  });
-
+  }
 
 
 });
+});
 
+});
+
+});
+
+
+function sortDisplay(settings) {
+
+  chrome.storage.sync.get(null, function(data) {
+
+        storageCache = data; // data from chrome storage        
+
+        // create a listing from for rank.
+
+        var rankHTML = "";
+        var sortedDisplay = [];
+
+        for (var j = 0; j < obData.length; j++) {
+
+          sortedDisplay.push(obData[j][settings]);
+
+        }
+
+        if (settings == "name") {
+
+                   // check if we have it sorted yet or not
+                   if (storageCache[settings] == "on" || storageCache[settings] == null) {
+
+
+                      chrome.storage.sync.set({[settings]: "off"}, null);
+
+
+
+                    sortedDisplay.sort();
+
+                  } else if (storageCache[settings] == "off") {
+
+
+                    chrome.storage.sync.set({[settings]: "on"}, null);
+
+      
+                    sortedDisplay.sort();
+                    sortedDisplay.reverse();
+
+                  }
+
+                } else {
+
+         // check if we have it sorted yet or not
+         if (storageCache[settings] == "on" || storageCache[settings] == null) {
+
+
+          if (settings === "rank") {
+           chrome.storage.sync.set({[settings]: "on"}, null);
+
+         } else {
+           chrome.storage.sync.set({[settings]: "off"}, null);
+
+         }
+
+         sortedDisplay.sort(function(a, b) {
+          return a - b;
+        });          
+
+       } else if (storageCache[settings] == "off") {
+
+
+
+        chrome.storage.sync.set({[settings]: "on"}, null);
+        chrome.storage.sync.set({"display": [settings]}, null);
+
+        sortedDisplay.sort(function(a, b) {
+          return b - a;
+        });
+
+      }
+    }
+
+
+        // create a string for html code to implement 
+        for (var n = 0; n < sortedDisplay.length; n++) {
+
+          for (var x = 0; x < obData.length; x++) {
+
+            if (sortedDisplay[n] == obData[x][settings]) {
+
+              rankHTML += obData[x].html;
+
+            }
+          }
+        }
+
+        chrome.storage.sync.set({"display": [settings]}, null);
+
+
+        jQuery('#cryptoTable').html(''); // empty cryptoTable div
+
+        $("#cryptoTable").append(rankHTML); // populate cryptoTable div
+
+      });
+}
+
+
+
+// create event listeners on display settings
+$("#rank").click(function(){sortDisplay("rank");});
+
+$("#name").click(function(){sortDisplay("name");});
+
+$("#price").click(function(){sortDisplay("price");});
+
+$("#change").click(function(){sortDisplay("change");});
 
 
