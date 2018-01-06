@@ -11,57 +11,57 @@ var settings = "";
 // add to this array, to add more cryptos to track
 
 var arrCoinDb = [{"storageName": "bitcoin", "pushName": "bitcoin"},
-{"storageName": "litecoin", "pushName": "litecoin"},
-{"storageName": "ripple", "pushName": "ripple"},
-{"storageName": "ethereum", "pushName": "ethereum"},
-{"storageName": "cardano", "pushName": "cardano"},
-{"storageName": "iota", "pushName": "iota"},
-{"storageName": "tron", "pushName": "tron"},
-{"storageName": "stellar", "pushName": "stellar"},
-{"storageName": "bitcoincash", "pushName": "bitcoin-cash"},
-{"storageName": "nem", "pushName": "nem"},
-{"storageName": "dash", "pushName": "dash"},
-{"storageName": "monero", "pushName": "monero"},
-{"storageName": "neo", "pushName": "neo"},
-{"storageName": "eos", "pushName": "eos"},
-{"storageName": "bitcoingold", "pushName": "bitcoin-gold"},
-{"storageName": "qtum", "pushName": "qtum"},
-{"storageName": "raiblocks", "pushName": "raiblocks"},
-{"storageName": "ethereumclassic", "pushName": "ethereum-classic"},
-{"storageName": "icon", "pushName": "icon"},
-{"storageName": "bitconnect", "pushName": "bitconnect"},
-{"storageName": "lisk", "pushName": "lisk"},
-{"storageName": "bitshares", "pushName": "bitshares"},
-{"storageName": "status", "pushName": "status"},
-{"storageName": "omisego", "pushName": "omisego"},
-{"storageName": "verge", "pushName": "verge"},
-{"storageName": "populous", "pushName": "populous"},
-{"storageName": "ardor", "pushName": "ardor"},
-{"storageName": "steem", "pushName": "steem"},
-{"storageName": "zcash", "pushName": "zcash"},
-{"storageName": "stratis", "pushName": "stratis"},
-{"storageName": "tether", "pushName": "tether"},
-{"storageName": "waves", "pushName": "waves"},
-{"storageName": "hshare", "pushName": "hshare"},
-{"storageName": "digibyte", "pushName": "digibyte"},
-{"storageName": "bytecoin", "pushName": "bytecoin-bcn"},
-{"storageName": "komodo", "pushName": "komodo"},
-{"storageName": "siacoin", "pushName": "siacoin"},
-{"storageName": "vechain", "pushName": "vechain"},
-{"storageName": "binancecoin", "pushName": "binance-coin"},
-{"storageName": "golem", "pushName": "golem-network-tokens"},
-{"storageName": "augur", "pushName": "augur"},
-{"storageName": "veritaseum", "pushName": "veritaseum"},
-{"storageName": "ark", "pushName": "ark"},
-{"storageName": "kucoinshares", "pushName": "kucoin-shares"},
-{"storageName": "decred", "pushName": "decred"},
-{"storageName": "basicattentiontoken", "pushName": "basic-attention-token"},
-{"storageName": "nxt", "pushName": "nxt"},
-{"storageName": "dragonchain", "pushName": "dragonchain"},
-{"storageName": "salt", "pushName": "salt"},
-{"storageName": "pivx", "pushName": "pivx"},
-{"storageName": "powerledger", "pushName": "power-ledger"},
-{"storageName": "factom", "pushName": "factom"}];
+                  {"storageName": "litecoin", "pushName": "litecoin"},
+                  {"storageName": "ripple", "pushName": "ripple"},
+                  {"storageName": "ethereum", "pushName": "ethereum"},
+                  {"storageName": "cardano", "pushName": "cardano"},
+                  {"storageName": "iota", "pushName": "iota"},
+                  {"storageName": "tron", "pushName": "tron"},
+                  {"storageName": "stellar", "pushName": "stellar"},
+                  {"storageName": "bitcoincash", "pushName": "bitcoin-cash"},
+                  {"storageName": "nem", "pushName": "nem"},
+                  {"storageName": "dash", "pushName": "dash"},
+                  {"storageName": "monero", "pushName": "monero"},
+                  {"storageName": "neo", "pushName": "neo"},
+                  {"storageName": "eos", "pushName": "eos"},
+                  {"storageName": "bitcoingold", "pushName": "bitcoin-gold"},
+                  {"storageName": "qtum", "pushName": "qtum"},
+                  {"storageName": "raiblocks", "pushName": "raiblocks"},
+                  {"storageName": "ethereumclassic", "pushName": "ethereum-classic"},
+                  {"storageName": "icon", "pushName": "icon"},
+                  {"storageName": "bitconnect", "pushName": "bitconnect"},
+                  {"storageName": "lisk", "pushName": "lisk"},
+                  {"storageName": "bitshares", "pushName": "bitshares"},
+                  {"storageName": "status", "pushName": "status"},
+                  {"storageName": "omisego", "pushName": "omisego"},
+                  {"storageName": "verge", "pushName": "verge"},
+                  {"storageName": "populous", "pushName": "populous"},
+                  {"storageName": "ardor", "pushName": "ardor"},
+                  {"storageName": "steem", "pushName": "steem"},
+                  {"storageName": "zcash", "pushName": "zcash"},
+                  {"storageName": "stratis", "pushName": "stratis"},
+                  {"storageName": "tether", "pushName": "tether"},
+                  {"storageName": "waves", "pushName": "waves"},
+                  {"storageName": "hshare", "pushName": "hshare"},
+                  {"storageName": "digibyte", "pushName": "digibyte"},
+                  {"storageName": "bytecoin", "pushName": "bytecoin-bcn"},
+                  {"storageName": "komodo", "pushName": "komodo"},
+                  {"storageName": "siacoin", "pushName": "siacoin"},
+                  {"storageName": "vechain", "pushName": "vechain"},
+                  {"storageName": "binancecoin", "pushName": "binance-coin"},
+                  {"storageName": "golem", "pushName": "golem-network-tokens"},
+                  {"storageName": "augur", "pushName": "augur"},
+                  {"storageName": "veritaseum", "pushName": "veritaseum"},
+                  {"storageName": "ark", "pushName": "ark"},
+                  {"storageName": "kucoinshares", "pushName": "kucoin-shares"},
+                  {"storageName": "decred", "pushName": "decred"},
+                  {"storageName": "basicattentiontoken", "pushName": "basic-attention-token"},
+                  {"storageName": "nxt", "pushName": "nxt"},
+                  {"storageName": "dragonchain", "pushName": "dragonchain"},
+                  {"storageName": "salt", "pushName": "salt"},
+                  {"storageName": "pivx", "pushName": "pivx"},
+                  {"storageName": "powerledger", "pushName": "power-ledger"},
+                  {"storageName": "factom", "pushName": "factom"}];
 
 
 $(document).ready(function() { 
@@ -124,36 +124,10 @@ $(apiArray).each(function() {
   if(done == 0) {
 
 
-    if (storageCache.display == "name" && storageCache.style == "desending" || storageCache.name == null) {
+    
 
-        if (storageCache.name == "off")  {
-
-          chrome.storage.sync.set({"name": "on"}, null);
-
-        } else if (storageCache.name == "name" && storageCache.style == "asending" ) {
-
-          chrome.storage.sync.set({"name": "off"}, null);
-
-        }
-
-
-    sortDisplay("name");
-
-    } else if (storageCache.display == "price") {
-        if (storageCache.price == "off")  {
-
-                  chrome.storage.sync.set({"price": "on"}, null);
-
-        }
-    sortDisplay("price");
-    } else if (storageCache.display == "change") {
-
-   
-    sortDisplay("change");
-    } else if (storageCache.display == "rank") {
 
     sortDisplay("rank");
-    }
 
   }
 
@@ -189,7 +163,7 @@ function sortDisplay(settings) {
                    if (storageCache[settings] == "on" || storageCache[settings] == null) {
 
 
-                      chrome.storage.sync.set({[settings]: "off"}, null);
+                    chrome.storage.sync.set({[settings]: "off"}, null);
 
 
 
@@ -200,7 +174,7 @@ function sortDisplay(settings) {
 
                     chrome.storage.sync.set({[settings]: "on"}, null);
 
-      
+                    
                     sortedDisplay.sort();
                     sortedDisplay.reverse();
 
