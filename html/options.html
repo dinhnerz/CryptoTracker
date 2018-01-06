@@ -1,91 +1,29 @@
 <html>
 <head>
-    <script type="text/javascript" src="../js/jquery.js"></script>
+  <script type="text/javascript" src="../js/jquery.js"></script>
 
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"></link>
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"></link>
 
 
-    <link rel="stylesheet" type="text/css" href="../css/global.css"></link>
-    <link rel="stylesheet" type="text/css" href="../css/options.css"></link>
+  <link rel="stylesheet" type="text/css" href="../css/global.css"></link>
+  <link rel="stylesheet" type="text/css" href="../css/options.css"></link>
 </head>
 <body>
 
-    <div class="container">
-        <div class="col-md-7 col-md-offset-2">
-            <div class="row">
-                <h1 class="text-center "><img src="../images/cryptocoin.png" style="width: 50px; height: 50px"><b>  CryptoTrakker</b></h1><br>
-                <div class="container-fluid well message" style="background-color: #FFFFFF">
+  <div class="container">
+    <div class="col-md-7 col-md-offset-2">
+      <div class="row">
+        <div><h1 class="text-center"><img src="../images/cryptocoin.png" style="width: 50px; height: 50px"><b>  CryptoTrakker</b></h1><br></div>
+        <div class="well-md message" id="resetFavorites"><h4><a>reset</a></h4></div>
 
-                  <div id="bitcoin" class="bitcoin coinbg col-md-3 well message"><img src="../images/logo/bitcoin.png"> Bitcoin</div>
+        <div class="container-fluid well message" id="cryptoOptions" style="background-color: #FFFFFF">
 
-                  <div id="ripple" class="ripple coinbg col-md-3 well message"><img src="../images/logo/ripple.png"> Ripple</div>
+        </div>
 
-                  <div id="ethereum" class="ethereum coinbg col-md-3 well message"><img src="../images/logo/ethereum.png"> Ethereum</div>
-
-                  <div id="litecoin" class="litecoin coinbg col-md-3 well message"><img src="../images/logo/litecoin.png"> Litecoin</div>
-                  <div id="bitcoincash" class="bitcoincash coinbg col-md-3 well message"><img src="../images/logo/bitcoin-cash.png"> Bitcoin Cash</div>
-                  <div id="cardano" class="cardano coinbg col-md-3 well message"><img src="../images/logo/cardano.png"> Cardano</div>
-                  <div id="stellar" class="stellar coinbg col-md-3 well message"><img src="../images/logo/stellar.png"> Stellar</div>
-                  <div id="nem" class="nem coinbg col-md-3 well message"><img src="../images/logo/nem.png"> NEM</div>
-                  <div id="iota" class="iota coinbg col-md-3 well message"><img src="../images/logo/iota.png"> IOTA</div>
-
-                  <div id="dash" class="dash coinbg col-md-3 well message"><img src="../images/logo/dash.png"> Dash</div>
-                  <div id="monero" class="monero coinbg col-md-3 well message"><img src="../images/logo/monero.png"> Monero</div>
-                  <div id="neo" class="neo coinbg col-md-3 well message"><img src="../images/logo/neo.png"> NEO</div>
-                  <div id="tron" class="tron coinbg col-md-3 well message"><img src="../images/logo/tron.png"> TRON</div>
-
-                  <div id="eos" class="eos coinbg col-md-3 well message"><img src="../images/logo/eos.png"> EOS</div>
-                  <div id="bitcoingold" class="bitcoingold coinbg col-md-3 well message"><img src="../images/logo/bitcoin-gold.png"> Bitcoin Gold</div>
-
-                  <div id="qtum" class="qtum coinbg col-md-3 well message"><img src="../images/logo/qtum.png"> Qtum</div>
-
-
-
-                  <div id="ethereumclassic" class="ethereumclassic coinbg col-md-3 well message"><img src="../images/logo/ethereum-classic.png"> E Classic</div>
-                  <div id="raiblocks" class="raiblocks coinbg col-md-3 well message"><img src="../images/logo/raiblocks.png"> RaiBlocks</div>
-                  <div id="icon" class="icon coinbg col-md-3 well message"><img src="../images/logo/icon.png"> ICON</div>
-                  <div id="bitconnect" class="bitconnect coinbg col-md-3 well message"><img src="../images/logo/bitconnect.png"> BitConnect</div>
-                  <div id="lisk" class="lisk coinbg col-md-3 well message"><img src="../images/logo/lisk.png"> Lisk</div>
-                  <div id="bitshares" class="bitshares coinbg col-md-3 well message"><img src="../images/logo/bitshares.png"> BitShares</div>
-                  <div id="status" class="status coinbg col-md-3 well message"><img src="../images/logo/status.png"> Status</div>
-                  <div id="omisego" class="omisego coinbg col-md-3 well message"><img src="../images/logo/omisego.png"> OmiseGO</div>
-                  <div id="verge" class="verge coinbg col-md-3 well message"><img src="../images/logo/verge.png"> Verge</div>
-                  <div id="populous" class="populous coinbg col-md-3 well message"><img src="../images/logo/populous.png"> Populous</div>
-                  <div id="ardor" class="ardor coinbg col-md-3 well message"><img src="../images/logo/ardor.png"> Ardor</div>
-                  <div id="steem" class="steem coinbg col-md-3 well message"><img src="../images/logo/steem.png"> Steem</div>
-                  <div id="zcash" class="zcash coinbg col-md-3 well message"><img src="../images/logo/zcash.png"> Zcash</div>
-                  <div id="stratis" class="stratis coinbg col-md-3 well message"><img src="../images/logo/stratis.png"> Stratis</div>
-                  <div id="tether" class="tether coinbg col-md-3 well message"><img src="../images/logo/tether.png"> Tether</div>
-
-
-                  <div id="waves" class="waves coinbg col-md-3 well message"><img src="../images/logo/waves.png"> Waves</div>
-                  <div id="bytecoin" class="bytecoin coinbg col-md-3 well message"><img src="../images/logo/bytecoin-bcn.png"> Bytecoin</div>
-                  <div id="hshare" class="hshare coinbg col-md-3 well message"><img src="../images/logo/hshare.png"> Hshare</div>
-                  <div id="komodo" class="komodo coinbg col-md-3 well message"><img src="../images/logo/komodo.png"> Komodo</div>
-                  <div id="siacoin" class="siacoin coinbg col-md-3 well message"><img src="../images/logo/siacoin.png"> Siacoin</div>
-                  <div id="vechain" class="vechain coinbg col-md-3 well message"><img src="../images/logo/vechain.png"> VeChain</div>
-                  <div id="binancecoin" class="binancecoin coinbg col-md-3 well message"><img src="../images/logo/binance-coin.png"> Binance</div>
-                  <div id="golem" class="golem coinbg col-md-3 well message"><img src="../images/logo/golem-network-tokens.png"> Golem</div>
-                  <div id="augur" class="augur coinbg col-md-3 well message"><img src="../images/logo/augur.png"> Augur</div>
-                  <div id="digibyte" class="digibyte coinbg col-md-3 well message"><img src="../images/logo/digibyte.png"> DigiByte</div>
-                  <div id="veritaseum" class="veritaseum coinbg col-md-3 well message"><img src="../images/logo/veritaseum.png"> Veritaseum</div>
-                  <div id="ark" class="ark coinbg col-md-3 well message"><img src="../images/logo/ark.png"> Ark</div>
-                  <div id="kucoinshares" class="kucoinshares coinbg col-md-3 well message"><img src="../images/logo/kucoin-shares.png"> KuCoin</div>
-                  <div id="decred" class="decred coinbg col-md-3 well message"><img src="../images/logo/decred.png"> Decred</div>
-                  <div id="basicattentiontoken" class="basicattentiontoken coinbg col-md-3 well message"><img src="../images/logo/basic-attention-token.png"> B A T</div>
-                  <div id="nxt" class="nxt coinbg col-md-3 well message"><img src="../images/logo/nxt.png"> Nxt</div>
-                  <div id="dragonchain" class="dragonchain coinbg col-md-3 well message"><img src="../images/logo/dragonchain.png"> Dragonchain</div>
-                  <div id="salt" class="salt coinbg col-md-3 well message"><img src="../images/logo/salt.png"> SALT</div>
-                  <div id="pivx" class="pivx coinbg col-md-3 well message"><img src="../images/logo/pivx.png"> PIVX</div>
-                  <div id="powerledger" class="powerledger coinbg col-md-3 well message"><img src="../images/logo/power-ledger.png"> P. Ledger</div>
-                  <div id="factom" class="factom coinbg col-md-3 well message"><img src="../images/logo/factom.png"> Factom</div>
-
-              </div>
-
-          </div>
       </div>
+    </div>
   </div>
 
   <div class="container-fluid" style="height: 25px; position: body">
@@ -93,6 +31,7 @@
     </footer>   
   </div>
 
-<script type="text/javascript" src="../js/options.js"></script>
+  <script type="text/javascript" src="../js/options.js"></script>
+  <script type="text/javascript" src="../js/populateOptionsTable.js"></script>
 </body>
 </html>
