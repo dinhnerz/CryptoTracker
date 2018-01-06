@@ -7,7 +7,7 @@
         <div><b>Author:</b> Dinh Luong (dinhnluong@gmail.com)</div>
         <div><b>Updated:</b> 01.06.2018</div>
         <div><b>API: </b><a href="https://coinmarketcap.com/api/" target="blank">https://coinmarketcap.com/api/</a></div>
-        <div><b>Description:</b><p>Track your favorite Crypto currency movement. Over 50 Crypto coins to choose from. Rememeber to check back often for updates, will be adding more features as the project progresses and more crypto coins in the near future for tracking. </p></div>
+        <div><b>Description:</b>Track your favorite Crypto currency movement. Over 50 Crypto coins to choose from. Rememeber to check back often for updates, will be adding more features as the project progresses and more crypto coins in the near future for tracking. </div>
         <div><b>Installation:</b>Download Zip and load as chrome exntension package via chrome developer mode in extensions settings. </div>
         <div><b>Bundled Software / Libraries:</b></div>  
                  <div>
