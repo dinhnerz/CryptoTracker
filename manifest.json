@@ -1,12 +1,13 @@
-// dinhnluong@gmail.com 01.04.2018
+// dinhnluong@gmail.com 01.06.2018
 
 {
 
-    "name": "CryptoTrakker",
-    "version": "0.34",
     "manifest_version": 2,
 
-    "description": "Track your favorite Crypto currency movement!",
+    "name": "GitHub/CryptoTrakker",
+    "version": "0.52",
+    "description": "Be up to date and track your favorite crypto coin price.",
+
     "icons": {
         "19": "images/cryptocoin.png",
         "38": "images/cryptocoin.png",
@@ -27,7 +28,7 @@
     "homepage_url": "https://github.com/dinhnerz/CryptoTrakker#-cryptotrakker",
 
     "permissions": [ 
-          "storage"
-    ]
+      "storage"
+  ]
     
 }
