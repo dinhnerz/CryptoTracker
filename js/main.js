@@ -8,6 +8,28 @@ var tableHTML = "";
 
 var settings = "";
 
+
+chrome.storage.sync.get(null, function(data) {
+
+  if (data.default == null) {
+
+        // set 5 default coins
+        chrome.storage.sync.set({"bitcoin": "on"}, null);
+        chrome.storage.sync.set({"litecoin": "on"}, null);
+        chrome.storage.sync.set({"ethereum": "on"}, null);
+        chrome.storage.sync.set({"ripple": "on"}, null);
+        chrome.storage.sync.set({"bitcoincash": "on"}, null);
+
+        chrome.storage.sync.set({"default": "v1"}, null);
+
+        // set default to display names
+        chrome.storage.sync.set({"display": "name"}, null);
+        chrome.storage.sync.set({"style": "asending"});
+
+
+      }
+});
+
 // add to this array, to add more cryptos to track
 
 var arrCoinDb = [{"storageName": "bitcoin", "pushName": "bitcoin"},
