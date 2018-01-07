@@ -1,11 +1,9 @@
-// dinhnluong@gmail.com 01.06.2018
-
 {
 
     "manifest_version": 2,
 
-    "name": "GitHub/CryptoTrakker",
-    "version": "0.52",
+    "name": "CryptoTracker",
+    "version": "0.55",
     "description": "Be up to date and track your favorite crypto coin price.",
 
     "icons": {
@@ -15,7 +13,7 @@
     },
 
     "browser_action": {
-        "default_title": "CryptoTrakker",
+        "default_title": "CryptoTracker",
         "default_icon": {
             "19": "images/cryptocoin.png", 
             "38": "images/cryptocoin.png"
@@ -25,10 +23,11 @@
 
 
     "options_page": "html/options.html",
-    "homepage_url": "https://github.com/dinhnerz/CryptoTrakker#-cryptotrakker",
+    "homepage_url": "https://github.com/dinhnerz/CryptoTracker#-cryptotracker",
 
     "permissions": [ 
       "storage"
   ]
     
 }
+
