@@ -17,7 +17,14 @@ var arrCryptoNames = ["bitcoin", "litecoin", "ripple", "ethereum", "cardano", "i
                       "waves", "hshare", "digibyte", "bytecoin", "komodo", "siacoin", "vechain",
                       "binancecoin", "golem", "augur", "veritaseum", "ark", "kucoinshares", "decred",
                       "basicattentiontoken", "nxt", "dragonchain", "salt", "pivx", "powerledger",
-                      "factom"];
+                      "factom", "0x", "aelf", "aeternity", "aion", "bancor", "bitcore", "byteball",
+                      "bytom", "chainlink", "cindicator", "cryptonex", "dent", "dentacoin", 
+                      "digixdao", "dogecoin", "electroneum", "emercoin", "enigma", "ethos", 
+                      "experiencepoints", "funfair", "gas", "gnosis", "gxshares", "kin", "kybernetwork",
+                      "loopring", "maidsafecoin", "medibloc", "monacoin", "neblio", "nebulas", 
+                      "nexus", "qash", "quantstamp", "rchain", "reddcoin", "requestnetwork", 
+                      "sirinlabs", "smartcash", "substratum", "syscoin", "tenx", "walton", "wax",
+                      "xplay", "zclassic", "zcoin", "paccoin"];
 
 
 
