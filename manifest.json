@@ -3,7 +3,7 @@
     "manifest_version": 2,
 
     "name": "CryptoTracker",
-    "version": "0.55",
+    "version": "0.56",
     "description": "Be up to date and track your favorite crypto coin price.",
 
     "icons": {
