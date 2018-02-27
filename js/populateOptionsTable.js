@@ -1,4 +1,4 @@
-// dinhnluong@gmail.com 01.06.2018
+// dinhnluong@gmail.com 02.27.2018
 
 
 // name: Displayed name of crypto coin, code would be used for html, png is file name for image source
@@ -57,9 +57,6 @@ var arrCrypto = [{"name": "Bitcoin", "code": "bitcoin", "png": "bitcoin"},
                 {"name": "PIVX", "code": "pivx", "png": "pivx"},
                 {"name": "P. Ledger", "code": "powerledger", "png": "power-ledger"},
                 {"name": "Factom", "code": "factom", "png": "factom"},
-
-
-     
                 {"name": "0x", "code": "0x", "png": "0x"},
                 {"name": "aelf", "code": "aelf", "png": "aelf"},
                 {"name": "Aeternity", "code": "aeternity", "png": "aeternity"},
@@ -94,7 +91,6 @@ var arrCrypto = [{"name": "Bitcoin", "code": "bitcoin", "png": "bitcoin"},
                 {"name": "Nebulas", "code": "nebulas", "png": "nebulas-token"},
                 {"name": "Nexus", "code": "nexus", "png": "nexus"},
                 {"name": "QASH", "code": "qash", "png": "qash"},
-
                 {"name": "Quantstamp", "code": "quantstamp", "png": "quantstamp"},
                 {"name": "RChain", "code": "rchain", "png": "rchain"},
                 {"name": "Reddcoin", "code": "reddcoin", "png": "reddcoin"},
@@ -105,10 +101,14 @@ var arrCrypto = [{"name": "Bitcoin", "code": "bitcoin", "png": "bitcoin"},
                 {"name": "TenX", "code": "tenx", "png": "tenx"},
                 {"name": "Walton", "code": "walton", "png": "walton"},
                 {"name": "WAX", "code": "wax", "png": "wax"},
-                {"name": "XPlay", "code": "xplay", "png": "xplay"},
+                {"name": "XPA", "code": "xpa", "png": "xpa"},
                 {"name": "ZClassic", "code": "zclassic", "png": "zclassic"},
                 {"name": "ZCoin", "code": "zcoin", "png": "zcoin"},
-                {"name": "PACcoin", "code": "paccoin", "png": "paccoin"}];
+                {"name": "PACcoin", "code": "paccoin", "png": "paccoin"},
+                {"name": "Aragon", "code": "aragon", "png": "aragon"},
+                {"name": "Singularity", "code": "singularity", "png": "singularity"},
+                {"name": "Blocknet", "code": "blocknet", "png": "blocknet"},
+                {"name": "Particl", "code": "particl", "png": "particl"}];
 
 
 

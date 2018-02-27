@@ -1,4 +1,4 @@
-// dinhnluong@gmail.com 01.06.2018
+// dinhnluong@gmail.com 02.27.2018
 
 var storageCache = {};
 var apiArray = [];
@@ -84,7 +84,6 @@ var arrCoinDb = [{"storageName": "bitcoin", "pushName": "bitcoin"},
                   {"storageName": "pivx", "pushName": "pivx"},
                   {"storageName": "powerledger", "pushName": "power-ledger"},
                   {"storageName": "factom", "pushName": "factom"},
-
                   {"storageName": "0x", "pushName": "0x"},
                   {"storageName": "aelf", "pushName": "aelf"},
                   {"storageName": "aeternity", "pushName": "aeternity"},
@@ -119,7 +118,6 @@ var arrCoinDb = [{"storageName": "bitcoin", "pushName": "bitcoin"},
                   {"storageName": "nebulas", "pushName": "nebulas-token"},
                   {"storageName": "nexus", "pushName": "nexus"},
                   {"storageName": "qash", "pushName": "qash"},
-
                   {"storageName": "quantstamp", "pushName": "quantstamp"},
                   {"storageName": "rchain", "pushName": "rchain"},
                   {"storageName": "reddcoin", "pushName": "reddcoin"},
@@ -131,10 +129,15 @@ var arrCoinDb = [{"storageName": "bitcoin", "pushName": "bitcoin"},
                   {"storageName": "tenx", "pushName": "tenx"},
                   {"storageName": "walton", "pushName": "walton"},
                   {"storageName": "wax", "pushName": "wax"},
-                  {"storageName": "xplay", "pushName": "xplay"},
+                  {"storageName": "xpa", "pushName": "xpa"},
                   {"storageName": "zclassic", "pushName": "zclassic"},
                   {"storageName": "zcoin", "pushName": "zcoin"},
-                  {"storageName": "paccoin", "pushName": "paccoin"}];
+                  {"storageName": "paccoin", "pushName": "paccoin"},
+
+                  {"storageName": "aragon", "pushName": "aragon"},
+                  {"storageName": "blocknet", "pushName": "blocknet"},
+                  {"storageName": "singularity", "pushName": "singularitynet"},
+                  {"storageName": "particl", "pushName": "particl"}];
 
 $(document).ready(function() { 
 
@@ -172,7 +175,7 @@ $(apiArray).each(function() {
 
    var num = Number(data[0].price_usd);
 
-   tableHTML += "<td align=\"right\">$" + num.toLocaleString(undefined, {minimumFractionDigits: 3, maximumFractionDigits: 3}) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+   tableHTML += "<td align=\"right\">$" + num.toLocaleString(undefined, {minimumFractionDigits: 4, maximumFractionDigits: 4}) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
 
    if (data[0].percent_change_24h > 0) {
     tableHTML += "<td><div style=\"color: green\"><img src=\"../images/uparrow.png\"> " + data[0].percent_change_24h + "%</td><tr>";

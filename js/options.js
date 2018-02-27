@@ -1,4 +1,4 @@
-// dinhnluong@gmail.com 01.06.2018
+// dinhnluong@gmail.com 02.27.2018
 
 
 var storageCache = {}; //create a object to store chrome.storage data
@@ -24,7 +24,7 @@ var arrCryptoNames = ["bitcoin", "litecoin", "ripple", "ethereum", "cardano", "i
                       "loopring", "maidsafecoin", "medibloc", "monacoin", "neblio", "nebulas", 
                       "nexus", "qash", "quantstamp", "rchain", "reddcoin", "requestnetwork", 
                       "sirinlabs", "smartcash", "substratum", "syscoin", "tenx", "walton", "wax",
-                      "xplay", "zclassic", "zcoin", "paccoin"];
+                      "xpa", "zclassic", "zcoin", "paccoin", "aragon", "singularity", "particl", "blocknet"];
 
 
 
