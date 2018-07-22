@@ -1,37 +1,66 @@
-<html>
-<head>
-  <script type="text/javascript" src="../js/jquery.js"></script>
+<!-- dinhnluong@gmail.com
+  last updated : 07.21.2018 -->
 
-  <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+  <html>
+  <head>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="../css/global.css"></link>
+    <link rel="stylesheet" type="text/css" href="../css/options.css"></link>
+  </head>
 
-  <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"></link>
+  <body>
 
+    <div class="container">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="row">
+          <div><h1 class="text-center"><img src="../images/CT-logo-128.png" style="width: 75px; height: 75px"><font size="10"><b>  Crypto Tracker</b></font></h1><br></div>
 
-  <link rel="stylesheet" type="text/css" href="../css/global.css"></link>
-  <link rel="stylesheet" type="text/css" href="../css/options.css"></link>
-</head>
-<body>
+          <div class="row">
+            <div class="col-md-4">
+              <ul class="pagination" id="resetFavorites" title="Reset Cryptocurrencies being tracked">
+                <li><a href="">Reset Favorites</a></li>
+              </ul>
+            </div>
+            <div class="col-md-4 text-center">
+              <ul class="pagination"><font size="4"><i>Select the Cryptocurrencies you want to track</i></font>
+              </ul>
+            </div>
+            <div class="col-md-4 text-right">
+              <ul class="pagination">
+                <li><a href=""><div id="previous">Previous 100</div></a></li>
+                <li><a href=""><div id="next">Next 100</div></a></li>
+              </ul>
+            </div>
+          </div>
 
-  <div class="container">
-    <div class="col-md-7 col-md-offset-2">
-      <div class="row">
-        <div><h1 class="text-center"><img src="../images/cryptocoin.png" style="width: 50px; height: 50px"><b>  Crypto Tracker</b></h1><br></div>
-        <div class="well-md message" id="resetFavorites"><h4><a>reset</a></h4></div>
+          <div class="container-fluid" id="cryptoOptions" style="background-color: #FFFFFF">
+          </div>
+          <div class="row">
 
-        <div class="container-fluid well message" id="cryptoOptions" style="background-color: #FFFFFF">
+            <div class="col-md-3">
+              <ul class="pagination" id="resetFavoritesBottom" title="Reset Cryptocurrencies being tracked">
+                <li><a href="">Reset Favorites</a></li>
+              </ul>
+            </div>
+            <div class="col-md-5 text-center">
+              <ul class="pagination"><a href="https://github.com/dinhnerz/" target="blank">GitHub</a> | <a href="https://www.linkedin.com/in/dinh-luong" target="blank">LinkedIn</a><br>
+                <i>created by <a href="mailto:dinhnluong@gmail.com">dinhnluong</a> * 2018 *</i>
+              </ul>
 
+            </div>
+            <div class="col-md-4 text-right">
+              <ul class="pagination">
+                <li><a href=""><div id="previousBottom">Previous 100</div></a></li>
+                <li><a href=""><div id="nextBottom">Next 100</div></a></li>
+              </ul>
+            </div>
+          </div>
         </div>
-
       </div>
     </div>
-  </div>
 
-  <div class="container-fluid" style="height: 25px; position: body">
-    <footer class="text-center">created by dinhnluong - 2018 - <a href="https://github.com/dinhnerz/" target="blank">GitHub</a> :: <a href="https://www.linkedin.com/in/dinh-luong" target="blank">LinkedIn</a>
-    </footer>   
-  </div>
-
-  <script type="text/javascript" src="../js/options.js"></script>
-  <script type="text/javascript" src="../js/populateOptionsTable.js"></script>
-</body>
-</html>
+    <script type="text/javascript" src="../js/options.js"></script>
+  </body>
+  </html>

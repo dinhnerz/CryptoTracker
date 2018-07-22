@@ -1,6 +1,7 @@
 /*
 ** file: css/main.css
 ** description: custom styling for "html/main.html" file
+** last updated: 07/21/2018;
 */
 
 div#main-outer {
@@ -30,4 +31,13 @@ img#main-image {
 div#main-about-text {
     margin-top: 10px;
     text-align: center;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td {
+    padding: 3px;
+    border-top: 1px solid #ddd;
 }
