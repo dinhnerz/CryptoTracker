@@ -3,7 +3,7 @@
     </head>
     <body>
         <h1><img src="/images/CT-logo-128.png" style="width: 50px; height: 50px"> Crypto Tracker</h1>
-        <div><b>Version:</b> 0.61</div>
+        <div><b>Version:</b> 0.62</div>
         <div><b>Author:</b> Dinh Luong (dinhnluong@gmail.com)</div>
         <div><b>Updated:</b> 07.22.2018</div>
         <div><b>API: </b><a href="https://coinmarketcap.com/api/" target="blank">https://coinmarketcap.com/api/</a></div>
