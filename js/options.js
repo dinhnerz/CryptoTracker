@@ -1,119 +1,161 @@
-// dinhnluong@gmail.com 
-// last updated : 07.21.2018
+// dinhnluong@gmail.com
+// last updated : 07.10.2019
 
-$(document).ready(function() {
+let searchArray = [];
+let latestData = [];
+let arrFavsObj = [];
 
-  var storageCache = {};
-  var startPage = "";
-  var cryptoIdArray = [];
+$(document).ready(function () {
 
-  chrome.storage.sync.get(null, function(result) {
+	function start() {
+		let milliseconds = (new Date).getTime();
+		if (localStorage.getItem("cryptoData") === null) {
+			getCMCData();
+		} else {
+			latestData = JSON.parse(localStorage['cryptoData']);
+			searchArray = [];
+			latestData.forEach(function (item, key) {
+				searchArray.push(item.name);
+			});
+			searchArray.shift();
+			orderPages(latestData);
+			if (latestData[0].updated === undefined || (latestData[0].updated + 604800000) <= milliseconds) {
+				getCMCData();
+			}
+		}
 
-    if (result.default == null) {
-        // set default to not null
-        chrome.storage.sync.set({"default": "notNull"}, null);
-        // set big 2 default coins
-        chrome.storage.sync.set({"bitcoin": "on"}, null);
-        chrome.storage.sync.set({"ethereum": "on"}, null);
-        // set default coins ID
-        chrome.storage.sync.set({"cryptoId": [1, 1027]}, function(){
-          cryptoIdArray = result.cryptoId;
-        });
-        // set display default setting to rank
-        chrome.storage.sync.set({"displaySetting": "rank"}, null);
-        //n set start API
-        chrome.storage.sync.set({"current": "1"}, function() {
-          startPage = 1;
-        });
-      }
-      chrome.storage.sync.get("cryptoId", function(dataResult){ 
-        cryptoIdArray = dataResult.cryptoId;
-      })
-      startPage = parseInt(result.current);
-      start();
-    });
+		function getCMCData() {
+			$.ajax({
+				type: "GET",
+				url: "https://cors-anywhere.herokuapp.com/https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
+				dataType: "json",
+				data: {
+					start: 1,
+					limit: 5000,
+					convert: 'USD',
+					CMC_PRO_API_KEY: 'cb5ec527-529f-4f75-8b22-20327e52195f'
+				},
+				crossDomain: true,
+				success: function (data) {
+					data.data.unshift({
+						updated: milliseconds
+					});
+					localStorage['cryptoData'] = JSON.stringify(data.data);
+					latestData = data.data;
+					searchArray = [];
+					data.data.forEach(function (item, key) {
+						searchArray.push(item.name);
+					});
+					searchArray.shift();
+					orderPages(latestData);
+				},
+			});
+		}
+	}
 
-  function start() {
+	function orderPages(data) {
+		function addToFavorites(favs) {
+			if (localStorage.getItem("arrFavsObj") !== null) {
+				arrFavsObj = JSON.parse(localStorage['arrFavsObj']);
+			}
 
-    $.getJSON("https://api.coinmarketcap.com/v2/ticker/?start=" + startPage + "&limit=100&sort=rank&structure=array", function(data) {
-      var cryptoHTML = "";
-      for (var i = 0; i < 100; i++) {
-        cryptoHTML += "<div id=\"" + data.data[i].website_slug + "\" class=\"" + data.data[i].website_slug + 
-        " coinbg col-md-6 well message\"><img src=\"https://s2.coinmarketcap.com/static/img/coins/32x32/" + data.data[i].id + 
-        ".png\"> #" + data.data[i].rank + " - <b>" + data.data[i].name + " </b>(" + data.data[i].symbol + ")</div>";
-      }
+			if (arrFavsObj.findIndex(x => x.storedFavs == favs) < 0) {
+				arrFavsObj.push({
+					favsId: data[favs].id,
+					storedFavs: favs
+				})
+				arrFavsObj.sort(function (a, b) {
+					return a.storedFavs - b.storedFavs
+				});
+				localStorage['arrFavsObj'] = JSON.stringify(arrFavsObj);
+			}
+			displayFavs(arrFavsObj);
+		}
 
-      $("#cryptoOptions").append(cryptoHTML);
+		function displayFavs(displayTheseFavs) {
+			jQuery('#displayFavorites').html('');
+			for (i = 0; i < displayTheseFavs.length; i++) {
+				b = document.createElement("TR");
+				b.innerHTML = "<td><img src=\"https://s2.coinmarketcap.com/static/img/coins/32x32/" + data[displayTheseFavs[i].storedFavs].id + ".png\"></td><td>"
+					 + data[displayTheseFavs[i].storedFavs].symbol + " - " + data[displayTheseFavs[i].storedFavs].name + "</td>";
+				b.innerHTML += "<input type='hidden' value='" + displayTheseFavs[i].storedFavs + "'>";
+				b.addEventListener("click", function (e) {
+					thisValue = this.getElementsByTagName("input")[0].value;
+					arrFavsObj.splice(arrFavsObj.findIndex(x => x.storedFavs == thisValue), 1);
+					localStorage['arrFavsObj'] = JSON.stringify(arrFavsObj);
+					displayFavs(arrFavsObj);
+				});
+				$("#displayFavorites").append(b);
+			}
+		}
 
-      checkFavorites();
+		function autocomplete(inp) {
+			let currentFocus;
+			inp.addEventListener("input", function (e) {
+				let b,
+				i,
+				val = this.value;
+				jQuery('#cryptoTable').html('');
+				if (!val || val.length < 2) {
+					displayFirst100();
+					return false;
+				}
+				currentFocus = -1;
+				x = 0;
+				for (i = 1; i < data.length; i++) {
 
-      function checkFavorites() {
-        chrome.storage.sync.get(null, function(storageData) {
-          storageCache = storageData; 
-          for (var i = 0; i < 100; i++) {
-            if (storageCache[data.data[i].website_slug] == "on") {
-              document.getElementById(data.data[i].website_slug).style.background = "#D3D3D3";
-            }
-          }    
-        });
-      }
+					if ((data[i].name).substr(0, val.length).toUpperCase() == val.toUpperCase() || (data[i].symbol).substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+						x++;
+						b = document.createElement("TR");
+						b.innerHTML = "<td><img src=\"https://s2.coinmarketcap.com/static/img/coins/32x32/" + data[i].id + ".png\"></td>" +
+							"<td>" + data[i].symbol + " - " + data[i].name + "</td>";
+						b.innerHTML += "<input type='hidden' value='" + (i) + "'>";
+						b.addEventListener("click", function (e) {
+							addToFavorites(this.getElementsByTagName("input")[0].value);
+							inp.value = "";
+							jQuery('#cryptoTable').html('');
 
-      data.data.forEach(function(element) {
-        $("."+element.website_slug).click(function() {
-          chrome.storage.sync.get([element.website_slug], function(result) {
-            var data = result[element.website_slug];
-            if (data == "off" || data == null) {
-             document.getElementById(element.website_slug).style.background = "#D3D3D3";
-             chrome.storage.sync.set({[element.website_slug]: "on"}, null);
-             cryptoIdArray.push(element.id);
-             chrome.storage.sync.set({"cryptoId": cryptoIdArray}, null);
-           } else if (data == "on") {
-             document.getElementById(element.website_slug).style.background = "";
-             chrome.storage.sync.set({[element.website_slug]: "off"}, null);
-             cryptoIdArray.splice( $.inArray(element.id, cryptoIdArray), 1 );
-             chrome.storage.sync.set({"cryptoId": cryptoIdArray}, null);
-           }
-         });
-        });
-      });
-    });
-  }
+						});
+						$("#cryptoTable").append(b);
+						if (x == 15) {
+							break;
+						}
+					}
+				}
+				if (x == 0) {
+					$("#cryptoTable").append("<td></td><td><h4>No Coin found</h4></td>");
+				}
+			});
+
+			document.addEventListener("click", function (e) {
+				inp.value = "";
+				jQuery('#cryptoTable').html('');
+				displayFirst100();
+			});
+		}
+
+		autocomplete(document.getElementById("coinSearch"));
+
+		if (localStorage.getItem("arrFavsObj") !== null) {
+			arrFavsObj = JSON.parse(localStorage['arrFavsObj']);
+			displayFavs(arrFavsObj);
+		}
+
+		function displayFirst100() {
+			for (let i = 1; i < 16; i++) {
+				b = document.createElement("TR");
+				b.innerHTML = "<td><img src=\"https://s2.coinmarketcap.com/static/img/coins/32x32/" + data[i].id + ".png\"></td>" +
+					"</td><td>" + data[i].symbol + " - " + data[i].name + "</td>";
+				b.innerHTML += "<input type='hidden' value='" + (i) + "'>";
+				b.addEventListener("click", function (e) {
+					addToFavorites(this.getElementsByTagName("input")[0].value);
+					jQuery('#cryptoTable').html('');
+				});
+
+				$("#cryptoTable").append(b);
+			}
+		}
+		displayFirst100();
+	}
+	start();
 });
-
-
-$("#resetFavorites, #resetFavoritesBottom").click(function(){
-  chrome.storage.sync.clear(); 
-  window.location.reload();
-});
-
-$("#next, #nextBottom").click(function(){
-  chrome.storage.sync.get(null, function(result) {
-    if (result.current <= 1000) {
-      var currentPage = parseInt(result.current);
-      currentPage = currentPage + 100;
-      chrome.storage.sync.set({"current": currentPage}, function(){
-        console.log(result.current);
-        startPage = result.current;
-        console.log(startPage);
-        window.location.reload();
-      });
-    }    
-  });
-});
-
-$("#previous, #previousBottom").click(function(){
-  chrome.storage.sync.get(null, function(result) {
-    if (result.current > 1) {
-      var currentPage = parseInt(result.current);
-      currentPage = currentPage - 100;
-      chrome.storage.sync.set({"current": currentPage}, function(){
-        console.log(result.current);
-        startPage = result.current;
-        console.log(startPage);
-        window.location.reload();
-      });
-    }    
-  });
-});
-
-

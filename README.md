@@ -7,9 +7,9 @@
         <div><b>Author:</b> Dinh Luong (dinhnluong@gmail.com)</div>
         <div><b>Updated:</b> 07.10.2019</div>
         <div><b>API: </b><a href="https://coinmarketcap.com/api/" target="blank">https://coinmarketcap.com/api/</a></div>
-        <div><b>Description:</b>Track your favorite Cryptocurrencies movement.  </div>
-        <div><b>Installation:</b>Download Zip and load as chrome exntension package via chrome developer mode in extensions settings. Can also be installed via the <a href="https://chrome.google.com/webstore/detail/ebjjekdklfdnkbnjlinganmllmjfdblk" target="blank">Chrome Web Store</a></div> 
-        <div><b>Release notes:</b> Now you can easily search for your favorite coins by either name or symbol. All coins can be tracked without limitation of how many you can track. We have changed the version naming convention to the year and month of release (2019.7).</div>  
+        <div><b>Description: </b>Track your favorite Cryptocurrencies movement.  </div>
+        <div><b>Installation: </b>Download Zip and load as chrome exntension package via chrome developer mode in extensions settings. Can also be installed via the <a href="https://chrome.google.com/webstore/detail/ebjjekdklfdnkbnjlinganmllmjfdblk" target="blank">Chrome Web Store</a></div> 
+        <div><b>Release notes: </b> Now you can easily search for your favorite coins by either name or symbol. All coins can be tracked without limitation of how many you can track. We have changed the version naming convention to the year and month of release (2019.7).</div>  
 		<div><b>Bundled Software / Libraries:</b></div>  
                  <div>
             <ul>

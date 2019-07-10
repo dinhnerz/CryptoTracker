@@ -1,33 +1,40 @@
 <!-- dinhnluong@gmail.com
-  last updated : 07.25.2018 -->
+  last updated : 07.10.2019 -->
 
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"></link>
   <script type="text/javascript" src="../js/jquery.js"></script>
   <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="../css/global.css"></link>
   <link rel="stylesheet" type="text/css" href="../css/main.css"></link>
+  
 </head>
 <body>
   <div id="main-outer">
-   <table>
+   <table class=>
     <thead>
       <tr>
-        <th style="width: 40px"><div align="center" title="Visit Crypto Tracker GitHub Page"><a href="https://github.com/dinhnerz/CryptoTracker#-crypto-tracker" target="blank"><img src="../images/CT-logo-19.png" style="width:20px;height:20px;"></a></div></th>
-        <th style="width: 30px"><div id="symbol" title="Options"><a href="../html/options.html" target="blank"><img src="../images/options.png" style="width:20px;height:20px;"></a></div></th>
-          <th style="width: 50px"><div id="rank">Rank</div></th>
-
-          <th style="width: 150px"><div id="name">Name</div></th>
-          <th style="width: 100px"><div id="price" align="right">Price (USD)</div></th>
-          <th style="width: 40px"></a></th>
-          <th style="width: 120px"><div id="change">Change (24h)</div></th>
-        </tr>
+		<th scope="col" style="width: 40px"><div align="center" title="Visit Crypto Tracker GitHub Page"><a href="https://github.com/dinhnerz/CryptoTracker#-crypto-tracker" target="blank"><img src="../images/CT-logo-19.png" style="width:20px;height:20px;"></a></div></th>
+		<th scope="col" style="width: 30px"><div id="symbol" title="Options"><a href="../html/options.html" target="blank"><img src="../images/options.png" style="width:20px;height:20px;"></a></div></th>
+		<th scope="col" style="width: 50px"><div id="rank">Rank</div></th>
+		<th scope="col" style="width: 150px"><div id="name">Name</div></th>
+		<th scope="col" style="width: 140px"><div style="align:right"><select id="currency" class="custom-select" style="width:90px"></select></div>		  
+			<div>
+				<th style="width:9px" id="price">
+					<img src="../images/lacc.png" >
+					<img src="../images/ldesc.png">					
+				</th>			
+			</div>	
+		</th>
+		<th scope="col" style="width: 20px"></a></th>
+		<th scope="col" style="width: 120px"><div id="change">Change (24h)</div></th>
+		</tr>
       </thead>
       <tbody id="cryptoTable">
       </tbody>
     </table>
   </div>
   <script type="text/javascript" src="../js/main.js"></script>
+  	
 </body>
 </html>

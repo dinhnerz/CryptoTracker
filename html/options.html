@@ -1,66 +1,62 @@
 <!-- dinhnluong@gmail.com
-  last updated : 07.21.2018 -->
-
-  <html>
+  last updated : 07.10.2019 -->
+  
+<html>
   <head>
+    <meta name="generator"
+    content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39" />
     <script type="text/javascript" src="../js/jquery.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"></link>
-    <link rel="stylesheet" type="text/css" href="../css/global.css"></link>
-    <link rel="stylesheet" type="text/css" href="../css/options.css"></link>
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+    <title></title>
   </head>
-
   <body>
-
+  
+    <nav class="navbar navbar-light bg-light">
+        <div class="col-md-8 offset-md-2" align="center">
+		<input type="text" class="form-control" placeholder="Search for coin name or symbol" style="width: 50em" id="coinSearch" />
+      </div>
+    </nav>
     <div class="container">
-      <div class="col-md-8 col-md-offset-2">
+      <div class="col-md-8 offset-md-2">
         <div class="row">
-          <div><h1 class="text-center"><img src="../images/CT-logo-128.png" style="width: 75px; height: 75px"><font size="10"><b>  Crypto Tracker</b></font></h1><br></div>
-
-          <div class="row">
-            <div class="col-md-4">
-              <ul class="pagination" id="resetFavorites" title="Reset Cryptocurrencies being tracked">
-                <li><a href="">Reset Favorites</a></li>
-              </ul>
-            </div>
-            <div class="col-md-4 text-center">
-              <ul class="pagination"><font size="4"><i>Select the Cryptocurrencies you want to track</i></font>
-              </ul>
-            </div>
-            <div class="col-md-4 text-right">
-              <ul class="pagination">
-                <li><a href=""><div id="previous">Previous 100</div></a></li>
-                <li><a href=""><div id="next">Next 100</div></a></li>
-              </ul>
-            </div>
+          <div class="container-fluid col-md-7" style="background-color: #FFFFFF">
+            <table class="table table-sm table-hover">
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 13%"></th>
+                  <th scope="col">Name</th>
+                </tr>
+              </thead>
+              <tbody id="cryptoTable"></tbody>
+            </table>
           </div>
-
-          <div class="container-fluid" id="cryptoOptions" style="background-color: #FFFFFF">
-          </div>
-          <div class="row">
-
-            <div class="col-md-3">
-              <ul class="pagination" id="resetFavoritesBottom" title="Reset Cryptocurrencies being tracked">
-                <li><a href="">Reset Favorites</a></li>
-              </ul>
-            </div>
-            <div class="col-md-5 text-center">
-              <ul class="pagination"><a href="https://github.com/dinhnerz/" target="blank">GitHub</a> | <a href="https://www.linkedin.com/in/dinh-luong" target="blank">LinkedIn</a><br>
-                <i>created by <a href="mailto:dinhnluong@gmail.com">dinhnluong</a> * 2018 *</i>
-              </ul>
-
-            </div>
-            <div class="col-md-4 text-right">
-              <ul class="pagination">
-                <li><a href=""><div id="previousBottom">Previous 100</div></a></li>
-                <li><a href=""><div id="nextBottom">Next 100</div></a></li>
-              </ul>
-            </div>
+          <div class="container-fluid col-md-5" style="background-color: #FFFFFF">
+            <table class="table table-sm table-hover">
+              <thead>
+                <tr>
+                  <th scope="col" style="width: 15%" ></th>
+                  <th scope="col">Favorites</th>
+                </tr>
+              </thead>
+              <tbody id="displayFavorites"></tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
+	
+	<footer class="footer fixed-bottom">
+      <div class="footer-copyright navbar-fixed-bottom text-center py-3" style="margin:10px; font-size: 12px">Crypto Tracker 2019.7 © 2019 
+      <a href="mailto:dinhnluong@gmail.com">DINH LUONG</a> 
+      <a href="https://github.com/dinhnerz/" target="blank">
+        <img src="../images/github.png" style="width:32px;height:32px;" />
+      </a> 
+      <a href="https://www.linkedin.com/in/dinh-luong" target="blank">
+        <img src="../images/linkedin.png" style="width:32px;height:32px;" />
+      </a></div>
+	</footer>
 
     <script type="text/javascript" src="../js/options.js"></script>
   </body>
-  </html>
+</html>

@@ -3,7 +3,7 @@
     "manifest_version": 2,
 
     "name": "Crypto Tracker",
-    "version": "0.62",
+    "version": "2019.7",
     "description": "Be up-to-date and track your favorite Cryptocurrencies movement.",
 
     "icons": {
@@ -30,4 +30,3 @@
   ]
     
 }
-
