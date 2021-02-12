@@ -1,9 +1,25 @@
-// dinhnluong@gmail.com 07.10.2019
+// dinhnluong@gmail.com
+// last updated : 02.11.2021
 
 let storedFavsId = [];
 let storedPropFavs = [];
 let sortOptions = '';
 let currencyOption = "";
+let key = "";
+let keysList = ["b1c6a77d-29c5-40b5-bc3e-03f3780a17a4","cb5ec527-529f-4f75-8b22-20327e52195f"]
+
+
+if (localStorage.getItem("keyToUse") !== null) {
+	key = keysList[Math.floor(Math.random()*keysList.length)];
+} else {
+	if (localStorage.getItem("keyToUse") == 'b1c6a77d-29c5-40b5-bc3e-03f3780a17a4') { 
+		key = 'cb5ec527-529f-4f75-8b22-20327e52195f'
+		} else {
+		key = 'b1c6a77d-29c5-40b5-bc3e-03f3780a17a4'
+	}
+}
+
+localStorage['keyToUse'] = key;
 
 if (localStorage.getItem("sortOptions") !== null) {
 	sortOptions = localStorage['sortOptions'];
@@ -42,21 +58,23 @@ $(document).ready(function () {
 
 	function start(favsArr) {
 	
+
+	
 		if ((storedMS + 600) < milliseconds) {
 		
 			jQuery('#cryptoTable').html('');			
 			jQuery('#cryptoTable').html("<td><div class='spinner-grow' role='status'><span class='sr-only'>Loading...</span></div></td><td><h4>Loading...</h4></td>");
-
 			localStorage['milliseconds'] = (new Date).getTime();
 			finalString = favsArr.join(",");
+
 			$.ajax({
 				type: "GET",
-				url: "https://cors-anywhere.herokuapp.com/https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?",
+				url: "https://ccointracker.herokuapp.com/https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?",
 				dataType: "json",
 				data: {
 					id: finalString,
 					convert: currencyOption,
-					CMC_PRO_API_KEY: 'cb5ec527-529f-4f75-8b22-20327e52195f'
+					CMC_PRO_API_KEY: key
 				},
 				crossDomain: true,
 				success: function (data) {
@@ -83,7 +101,9 @@ $(document).ready(function () {
 			b = document.createElement("TR");
 			b.innerHTML = "<td align=\"center\"><img src=\"https://s2.coinmarketcap.com/static/img/coins/16x16/" + storedPropFavs[propertyName].id + ".png\"></td>";
 			b.innerHTML += "<td>" + storedPropFavs[propertyName].symbol + "</td><td align=\"center\">" + storedPropFavs[propertyName].cmc_rank + "</td>";
-			b.innerHTML += "<td><a href=\"https://coinmarketcap.com/currencies/" + storedPropFavs[propertyName].name + "\" target=\"blank\">" + storedPropFavs[propertyName].name + "</a</td>";
+			var cryptoURL = storedPropFavs[propertyName].name.toLowerCase();
+			cryptoURL = cryptoURL.replace(" ", "-");
+			b.innerHTML += "<td><a href=\"https://coinmarketcap.com/currencies/" + cryptoURL + "\" target=\"blank\">" + storedPropFavs[propertyName].name + "</a</td>";
 			let num = Number(storedPropFavs[propertyName].quote[currencyOption].price);
 			b.innerHTML += "<td align=\"right\">" + num.toLocaleString(undefined, {
 				minimumFractionDigits: 4,
@@ -91,17 +111,15 @@ $(document).ready(function () {
 			}) + "</td><td></td><td></td>";
 
 			let change24h = storedPropFavs[propertyName].quote[currencyOption].percent_change_24h;
+			let removeDec24h = change24h.toLocaleString(undefined, {
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2
+				})
 
 			if (change24h > 0) {
-				b.innerHTML += "<td><div style=\"color: green\"><img src=\"../images/uparrow.png\"> +" + change24h.toLocaleString(undefined, {
-					minimumFractionDigits: 2,
-					maximumFractionDigits: 2
-				}) + "%</div></td>";
+				b.innerHTML += "<td align=\"center\"><div style=\"background-color: green; color: white; border-radius: 5px; width: 80px\">" + removeDec24h + "%</div></td>";
 			} else {
-				b.innerHTML += "<td><div style=\"color: red\"><img src=\"../images/downarrow.png\"> " + change24h.toLocaleString(undefined, {
-					minimumFractionDigits: 2,
-					maximumFractionDigits: 2
-				}) + "%</div></td>";
+				b.innerHTML += "<td align=\"center\"><div style=\"background-color: red; color: white; border-radius: 5px; width: 80px\">" + removeDec24h + "%</div></td>";
 			}
 			$("#cryptoTable").append(b);
 		}
