@@ -102,7 +102,7 @@ $(document).ready(function () {
 			b.innerHTML = "<td align=\"center\"><img src=\"https://s2.coinmarketcap.com/static/img/coins/16x16/" + storedPropFavs[propertyName].id + ".png\"></td>";
 			b.innerHTML += "<td>" + storedPropFavs[propertyName].symbol + "</td><td align=\"center\">" + storedPropFavs[propertyName].cmc_rank + "</td>";
 			var cryptoURL = storedPropFavs[propertyName].name.toLowerCase();
-			cryptoURL = cryptoURL.replace(" ", "-");
+			cryptoURL = cryptoURL.replace(/ /g,"-");
 			b.innerHTML += "<td><a href=\"https://coinmarketcap.com/currencies/" + cryptoURL + "\" target=\"blank\">" + storedPropFavs[propertyName].name + "</a</td>";
 			let num = Number(storedPropFavs[propertyName].quote[currencyOption].price);
 			b.innerHTML += "<td align=\"right\">" + num.toLocaleString(undefined, {
