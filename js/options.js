@@ -10,7 +10,7 @@ $(document).ready(function () {
 
 	function start() {		
 		let milliseconds = (new Date).getTime();
-		/*
+		
 		if (localStorage.getItem("cryptoData") === null) {
 			getCMCData();
 		} else {
@@ -27,7 +27,7 @@ $(document).ready(function () {
 			}
 
 		}
-		*/
+		
 		getCMCData();
 		
 		function getCMCData() {
@@ -102,7 +102,6 @@ $(document).ready(function () {
 				}				
 				b = document.createElement("TR");
 				b.innerHTML = "<td><img src=\"https://assets.coincap.io/assets/icons/" + data[ix].symbol.toLowerCase() + "@2x.png\" style=\"max-height: 100%; max-width: 100%\"></td><td>"
-				//b.innerHTML = "<td><img src=\"" + data[ix].image.replace("large", "small") + "\" style=\"max-height: 100%; max-width: 100%\"></td><td>"
 					 + data[ix].symbol.toUpperCase() + " - " + data[ix].name + "</td><td></td>";
 				b.innerHTML += "<input type='hidden' value='" + displayTheseFavs[i].storedFavs + "'>";
 				b.addEventListener("click", function (e) {
