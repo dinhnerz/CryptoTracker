@@ -1,11 +1,10 @@
 // dinhnluong@gmail.com
-// last updated : 02.16.2023
+// last updated : 09.07.2023
 
 let storedFavsId = [];
 let storedPropFavs = [];
 let sortOptions = '';
 let currencyOption = "";
-
 
 if (localStorage.getItem("sortOptions") !== null) {
 	sortOptions = localStorage['sortOptions'];
@@ -29,7 +28,7 @@ if (localStorage.getItem("milliseconds") !== null) {
 	localStorage['milliseconds'] = milliseconds;
 	storedMS = parseInt(localStorage['milliseconds']);
 }
-
+	
 $(document).ready(function () {
 	if (localStorage.getItem("arrFavsObj") !== null && JSON.parse(localStorage.getItem("arrFavsObj")).length > 0) {
 		let arrFavsObj = JSON.parse(localStorage['arrFavsObj']);
@@ -49,23 +48,22 @@ $(document).ready(function () {
 			jQuery('#cryptoTable').html("<td><div class='spinner-grow' role='status'><span class='sr-only'>Loading...</span></div></td><td><h4>Loading...</h4></td>");
 			localStorage['milliseconds'] = (new Date).getTime();
 			finalString = favsArr.join(",");
+			
+			console.log(finalString);
 
 			$.ajax({
 				type: "GET",
-				url: "https://api.coingecko.com/api/v3/coins/markets?",
+				url: "https://api.coincap.io/v2/assets?",
 				dataType: "json",
 				data: {
 					ids: finalString,
-					vs_currency: currencyOption,
-					order: 'market_cap_desc',
-					per_page: 250,
-					page: 1,
 					sparkline: false
 				},
 				crossDomain: true,
 				success: function (data) {
-					let finalData = data;
-					storedPropFavs = data;
+					console.log(data.data)
+					let finalData = data.data;
+					storedPropFavs = data.data;
 
 					localStorage['storedPropFavs'] = JSON.stringify(storedPropFavs);
 					
@@ -82,27 +80,24 @@ $(document).ready(function () {
 		jQuery('#cryptoTable').html('');
 		for (let propertyName in storedPropFavs) {
 			b = document.createElement("TR");
-			b.innerHTML = "<td align=\"center\"><img src=\"" + storedPropFavs[propertyName].image.replace("large", "small") + "\" style=\"max-height: 16; max-width: 16\"></td>"
-			b.innerHTML += "<td>" + storedPropFavs[propertyName].symbol.toUpperCase() + "</td><td align=\"center\">" + storedPropFavs[propertyName].market_cap_rank + "</td>";
-			var cryptoURL = storedPropFavs[propertyName].name.toLowerCase();
-			cryptoURL = cryptoURL.replace(" ", "-");
-			b.innerHTML += "<td><a href=\"https://coinmarketcap.com/currencies/" + cryptoURL + "\" target=\"blank\">" + storedPropFavs[propertyName].name + "</a</td>";
-			let num = Number(storedPropFavs[propertyName].current_price);
+			b.innerHTML = "<td align=\"center\"><img src=\"https://assets.coincap.io/assets/icons/" + storedPropFavs[propertyName].symbol.toLowerCase() + "@2x.png\" style=\"max-height: 16; max-width: 16\"></td>"
+			b.innerHTML += "<td>" + storedPropFavs[propertyName].symbol.toUpperCase() + "</td><td align=\"center\">" + storedPropFavs[propertyName].rank + "</td>";
+			b.innerHTML += "<td><a href=\"https://coinmarketcap.com/currencies/" + storedPropFavs[propertyName].id + "\" target=\"blank\">" + storedPropFavs[propertyName].name + "</a</td>";
+			let num = Number(storedPropFavs[propertyName].priceUsd);
 			b.innerHTML += "<td align=\"right\">" + num.toLocaleString(undefined, {
 				minimumFractionDigits: 4,
 				maximumFractionDigits: 4
 			}) + "</td><td></td><td></td>";
 
-			let change24h = storedPropFavs[propertyName].price_change_percentage_24h;
-			let removeDec24h = change24h.toLocaleString(undefined, {
-					minimumFractionDigits: 2,
-					maximumFractionDigits: 2
-				})
+			let change24h = storedPropFavs[propertyName].changePercent24Hr;
+			if (change24h == null) {
+				change24h = 0
+			}
 
 			if (change24h > 0) {
-				b.innerHTML += "<td align=\"center\"><div style=\"background-color: green; color: white; border-radius: 5px; width: 80px\">" + removeDec24h + "%</div></td>";
+				b.innerHTML += "<td align=\"center\"><div style=\"background-color: green; color: white; border-radius: 5px; width: 80px\">" + parseFloat(change24h).toFixed(2) + "%</div></td>";
 			} else {
-				b.innerHTML += "<td align=\"center\"><div style=\"background-color: red; color: white; border-radius: 5px; width: 80px\">" + removeDec24h + "%</div></td>";
+				b.innerHTML += "<td align=\"center\"><div style=\"background-color: red; color: white; border-radius: 5px; width: 80px\">" + parseFloat(change24h).toFixed(2) + "%</div></td>";
 			}
 			$("#cryptoTable").append(b);
 		}
@@ -144,12 +139,12 @@ $(document).ready(function () {
 		switch (sortOptions) {
 		case 'rankAsc':
 			storedPropFavs.sort(function (a, b) {
-				return a.market_cap_rank - b.market_cap_rank
+				return a.rank - b.rank
 			});
 			break;
 		case 'rankDesc':
 			storedPropFavs.sort(function (a, b) {
-				return b.market_cap_rank - a.market_cap_rank
+				return b.rank - a.rank
 			});
 			break;
 		case 'nameAsc':
@@ -160,22 +155,22 @@ $(document).ready(function () {
 			break;
 		case 'priceAsc':
 			storedPropFavs.sort(function (a, b) {
-				return a.current_price - b.current_price
+				return a.priceUsd - b.priceUsd
 			});
 			break;
 		case 'priceDesc':
 			storedPropFavs.sort(function (a, b) {
-				return b.current_price - a.current_price
+				return b.priceUsd - a.priceUsd
 			});
 			break;
 		case 'changeAsc':
 			storedPropFavs.sort(function (a, b) {
-				return a.market_cap_change_percentage_24h - b.market_cap_change_percentage_24h
+				return a.changePercent24Hr - b.changePercent24Hr
 			});
 			break;
 		case 'changeDesc':
 			storedPropFavs.sort(function (a, b) {
-				return b.market_cap_change_percentage_24h - a.market_cap_change_percentage_24h
+				return b.changePercent24Hr - a.changePercent24Hr
 			});
 			break;
 		}
@@ -200,7 +195,7 @@ $(document).ready(function () {
 	
 	let myOptions = [
 		"USD",
-		"BTC",
+	/*	"BTC",
 		"ETH",
 		"LTC",
 		"BCH",
@@ -259,13 +254,13 @@ $(document).ready(function () {
 		"XAG",
 		"XAU",
 		"BITS",
-		"SATS"
+		"SATS" */
 	];
 
 	$.each(myOptions, function (val, text) {
 		$('#currency').append($('<option></option>').val(text).html(text))
 	});
-	
+/*
 	$("#currency").val(currencyOption);
 
 	$('#currency').change(function () {
@@ -273,5 +268,5 @@ $(document).ready(function () {
 		currencyOption = $(this).val();
 		start(storedFavsId);
 	});
-
+*/
 });

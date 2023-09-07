@@ -1,18 +1,16 @@
 // dinhnluong@gmail.com
-// last updated : 02.16.2023
+// last updated : 09.07.2023
 
 let searchArray = [];
 let latestData = [];
 let arrFavsObj = [];
-
-let currentPage = 1;
 let coinsStorage = [];
-
 
 $(document).ready(function () {
 
 	function start() {		
 		let milliseconds = (new Date).getTime();
+		/*
 		if (localStorage.getItem("cryptoData") === null) {
 			getCMCData();
 		} else {
@@ -29,29 +27,26 @@ $(document).ready(function () {
 			}
 
 		}
-
+		*/
+		getCMCData();
+		
 		function getCMCData() {
 			jQuery('#cryptoTable').html('');			
 			jQuery('#cryptoTable').html("<td><div class='spinner-grow' role='status'><span class='sr-only'>Loading...</span></div></td><td><h4>Loading...may take a few moments</h4></td>");
 			$.ajax({
 				type: "GET",
-				url: "https://api.coingecko.com/api/v3/coins/markets?",
+				url: "https://api.coincap.io/v2/assets?",
 				dataType: "json",
 				data: {
-					vs_currency: 'usd',
-					order: 'market_cap_desc',
-					per_page: 250,
-					page: currentPage,
+					limit: '2000',
 					sparkline: false
 				},
 				crossDomain: true,
 				success: function (data) {
 				
+				console.log(data.data)
 
-				
-
-				if (currentPage == 10) {
-					coinsStorage = coinsStorage.concat(data);
+					coinsStorage = data.data;
 					
 					coinsStorage.unshift({
 						updated: milliseconds
@@ -66,11 +61,10 @@ $(document).ready(function () {
 					searchArray.shift();
 					orderPages(latestData);
 
-				} else {
+
 					coinsStorage = coinsStorage.concat(data);
-					currentPage++;
-					getCMCData();
-				}
+					
+					console.log(coinsStorage);
 				
 				},
 			});
@@ -107,7 +101,8 @@ $(document).ready(function () {
 					}
 				}				
 				b = document.createElement("TR");
-				b.innerHTML = "<td><img src=\"" + data[ix].image.replace("large", "small") + "\" style=\"max-height: 100%; max-width: 100%\"></td><td>"
+				b.innerHTML = "<td><img src=\"https://assets.coincap.io/assets/icons/" + data[ix].symbol.toLowerCase() + "@2x.png\" style=\"max-height: 100%; max-width: 100%\"></td><td>"
+				//b.innerHTML = "<td><img src=\"" + data[ix].image.replace("large", "small") + "\" style=\"max-height: 100%; max-width: 100%\"></td><td>"
 					 + data[ix].symbol.toUpperCase() + " - " + data[ix].name + "</td><td></td>";
 				b.innerHTML += "<input type='hidden' value='" + displayTheseFavs[i].storedFavs + "'>";
 				b.addEventListener("click", function (e) {
@@ -134,14 +129,13 @@ $(document).ready(function () {
 				currentFocus = -1;
 				x = 0;
 				for (i = 1; i < data.length; i++) {
-
+					console.log("OK:" + data[i]);
 					if ((data[i].name).substr(0, val.length).toUpperCase() == val.toUpperCase() || (data[i].symbol).substr(0, val.length).toUpperCase() == val.toUpperCase()) {
 						x++;
 						b = document.createElement("TR");
-						b.innerHTML = "<td><img src=\"" + data[i].image.replace("large", "small") + "\" style=\"max-height: 100%; max-width: 100%\"></td>"
-						b.innerHTML += "<td align=\"center\">" + data[i].market_cap_rank + "</td>";
+						b.innerHTML = "<td><img src=\"https://assets.coincap.io/assets/icons/" + data[i].symbol.toLowerCase() + "@2x.png\" style=\"max-height: 100%; max-width: 100%\"></td>"
+						b.innerHTML += "<td align=\"center\">" + data[i].rank + "</td>";
 						b.innerHTML += "<td>" + data[i].name + "</td>";
-
 						b.innerHTML += "<input type='hidden' value='" + (i) + "'>";
 						b.addEventListener("click", function (e) {
 							addToFavorites(this.getElementsByTagName("input")[0].value);
@@ -177,12 +171,11 @@ $(document).ready(function () {
 		}
 		
 		displayFirst100();
-	
 		function displayFirst100() {
 			for (let i = 1; i < 16; i++) {
 				b = document.createElement("TR");
-				b.innerHTML = "<td><img src=\"" + data[i].image.replace("large", "small") + "\" style=\"max-height: 100%; max-width: 100%\"></td>"
-				b.innerHTML += "<td align=\"center\">" + data[i].market_cap_rank + "</td>";
+				b.innerHTML = "<td><img src=\"https://assets.coincap.io/assets/icons/" + data[i].symbol.toLowerCase() + "@2x.png\" style=\"max-height: 100%; max-width: 100%\"></td>"
+				b.innerHTML += "<td align=\"center\">" + data[i].rank + "</td>";
 				b.innerHTML += "<td>" + data[i].name + "</td>";
 
 				b.innerHTML += "<input type='hidden' value='" + (i) + "'>";
@@ -203,6 +196,5 @@ $(document).ready(function () {
 		arrFavsObj = [];
 		localStorage.removeItem('arrFavsObj');
 	});
-	
-	
+
 });
