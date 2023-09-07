@@ -3,7 +3,7 @@
    "name": "Crypto Tracker",
    "options_page": "html/options.html",
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "2302",
+   "version": "2309",
    
    "action": {
       "default_icon": {
