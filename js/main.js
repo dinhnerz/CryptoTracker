@@ -1,25 +1,11 @@
 // dinhnluong@gmail.com
-// last updated : 02.11.2021
+// last updated : 02.16.2023
 
 let storedFavsId = [];
 let storedPropFavs = [];
 let sortOptions = '';
 let currencyOption = "";
-let key = "";
-let keysList = ["b1c6a77d-29c5-40b5-bc3e-03f3780a17a4","cb5ec527-529f-4f75-8b22-20327e52195f"]
 
-
-if (localStorage.getItem("keyToUse") !== null) {
-	key = keysList[Math.floor(Math.random()*keysList.length)];
-} else {
-	if (localStorage.getItem("keyToUse") == 'b1c6a77d-29c5-40b5-bc3e-03f3780a17a4') { 
-		key = 'cb5ec527-529f-4f75-8b22-20327e52195f'
-		} else {
-		key = 'b1c6a77d-29c5-40b5-bc3e-03f3780a17a4'
-	}
-}
-
-localStorage['keyToUse'] = key;
 
 if (localStorage.getItem("sortOptions") !== null) {
 	sortOptions = localStorage['sortOptions'];
@@ -45,7 +31,6 @@ if (localStorage.getItem("milliseconds") !== null) {
 }
 
 $(document).ready(function () {
-	
 	if (localStorage.getItem("arrFavsObj") !== null && JSON.parse(localStorage.getItem("arrFavsObj")).length > 0) {
 		let arrFavsObj = JSON.parse(localStorage['arrFavsObj']);
 		arrFavsObj.forEach(function (element) {
@@ -58,8 +43,6 @@ $(document).ready(function () {
 
 	function start(favsArr) {
 	
-
-	
 		if ((storedMS + 600) < milliseconds) {
 		
 			jQuery('#cryptoTable').html('');			
@@ -69,22 +52,22 @@ $(document).ready(function () {
 
 			$.ajax({
 				type: "GET",
-				url: "https://ccointracker.herokuapp.com/https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?",
+				url: "https://api.coingecko.com/api/v3/coins/markets?",
 				dataType: "json",
 				data: {
-					id: finalString,
-					convert: currencyOption,
-					CMC_PRO_API_KEY: key
+					ids: finalString,
+					vs_currency: currencyOption,
+					order: 'market_cap_desc',
+					per_page: 250,
+					page: 1,
+					sparkline: false
 				},
 				crossDomain: true,
 				success: function (data) {
-					let finalData = data.data;
-					storedPropFavs = [];
-					for (let propertyName in finalData) {
-						storedPropFavs.push(finalData[propertyName]);
-					}
+					let finalData = data;
+					storedPropFavs = data;
+
 					localStorage['storedPropFavs'] = JSON.stringify(storedPropFavs);
-					
 					
 					sortDisplay();
 				}
@@ -99,18 +82,18 @@ $(document).ready(function () {
 		jQuery('#cryptoTable').html('');
 		for (let propertyName in storedPropFavs) {
 			b = document.createElement("TR");
-			b.innerHTML = "<td align=\"center\"><img src=\"https://s2.coinmarketcap.com/static/img/coins/16x16/" + storedPropFavs[propertyName].id + ".png\"></td>";
-			b.innerHTML += "<td>" + storedPropFavs[propertyName].symbol + "</td><td align=\"center\">" + storedPropFavs[propertyName].cmc_rank + "</td>";
+			b.innerHTML = "<td align=\"center\"><img src=\"" + storedPropFavs[propertyName].image.replace("large", "small") + "\" style=\"max-height: 16; max-width: 16\"></td>"
+			b.innerHTML += "<td>" + storedPropFavs[propertyName].symbol.toUpperCase() + "</td><td align=\"center\">" + storedPropFavs[propertyName].market_cap_rank + "</td>";
 			var cryptoURL = storedPropFavs[propertyName].name.toLowerCase();
 			cryptoURL = cryptoURL.replace(" ", "-");
 			b.innerHTML += "<td><a href=\"https://coinmarketcap.com/currencies/" + cryptoURL + "\" target=\"blank\">" + storedPropFavs[propertyName].name + "</a</td>";
-			let num = Number(storedPropFavs[propertyName].quote[currencyOption].price);
+			let num = Number(storedPropFavs[propertyName].current_price);
 			b.innerHTML += "<td align=\"right\">" + num.toLocaleString(undefined, {
 				minimumFractionDigits: 4,
 				maximumFractionDigits: 4
 			}) + "</td><td></td><td></td>";
 
-			let change24h = storedPropFavs[propertyName].quote[currencyOption].percent_change_24h;
+			let change24h = storedPropFavs[propertyName].price_change_percentage_24h;
 			let removeDec24h = change24h.toLocaleString(undefined, {
 					minimumFractionDigits: 2,
 					maximumFractionDigits: 2
@@ -161,12 +144,12 @@ $(document).ready(function () {
 		switch (sortOptions) {
 		case 'rankAsc':
 			storedPropFavs.sort(function (a, b) {
-				return a.cmc_rank - b.cmc_rank
+				return a.market_cap_rank - b.market_cap_rank
 			});
 			break;
 		case 'rankDesc':
 			storedPropFavs.sort(function (a, b) {
-				return b.cmc_rank - a.cmc_rank
+				return b.market_cap_rank - a.market_cap_rank
 			});
 			break;
 		case 'nameAsc':
@@ -177,22 +160,22 @@ $(document).ready(function () {
 			break;
 		case 'priceAsc':
 			storedPropFavs.sort(function (a, b) {
-				return a.quote[currencyOption].price - b.quote[currencyOption].price
+				return a.current_price - b.current_price
 			});
 			break;
 		case 'priceDesc':
 			storedPropFavs.sort(function (a, b) {
-				return b.quote[currencyOption].price - a.quote[currencyOption].price
+				return b.current_price - a.current_price
 			});
 			break;
 		case 'changeAsc':
 			storedPropFavs.sort(function (a, b) {
-				return a.quote[currencyOption].percent_change_24h - b.quote[currencyOption].percent_change_24h
+				return a.market_cap_change_percentage_24h - b.market_cap_change_percentage_24h
 			});
 			break;
 		case 'changeDesc':
 			storedPropFavs.sort(function (a, b) {
-				return b.quote[currencyOption].percent_change_24h - a.quote[currencyOption].percent_change_24h
+				return b.market_cap_change_percentage_24h - a.market_cap_change_percentage_24h
 			});
 			break;
 		}
@@ -217,98 +200,66 @@ $(document).ready(function () {
 	
 	let myOptions = [
 		"USD",
+		"BTC",
+		"ETH",
+		"LTC",
+		"BCH",
+		"BNB",
+		"EOS",
+		"XRP",
+		"XLM",
+		"LINK",
+		"DOT",
+		"YFI",
 		"AED",
-		"ALL",
-		"AMD",
 		"ARS",
 		"AUD",
-		"AZN",
-		"BAM",
 		"BDT",
-		"BGN",
 		"BHD",
 		"BMD",
-		"BOB",
 		"BRL",
-		"BYN",
 		"CAD",
 		"CHF",
 		"CLP",
 		"CNY",
-		"COP",
-		"CRC",
-		"CUP",
 		"CZK",
 		"DKK",
-		"DOP",
-		"DZD",
-		"EGP",
 		"EUR",
 		"GBP",
-		"GEL",
-		"GHS",
-		"GTQ",
 		"HKD",
-		"HNL",
-		"HRK",
 		"HUF",
 		"IDR",
 		"ILS",
 		"INR",
-		"IQD",
-		"IRR",
-		"ISK",
-		"JMD",
-		"JOD",
 		"JPY",
-		"KES",
-		"KGS",
-		"KHR",
 		"KRW",
 		"KWD",
-		"KZT",
-		"LBP",
 		"LKR",
-		"MAD",
-		"MDL",
-		"MKD",
 		"MMK",
-		"MNT",
-		"MUR",
 		"MXN",
 		"MYR",
-		"NAD",
 		"NGN",
-		"NIO",
 		"NOK",
-		"NPR",
 		"NZD",
-		"OMR",
-		"PAB",
-		"PEN",
 		"PHP",
 		"PKR",
 		"PLN",
-		"QAR",
-		"RON",
-		"RSD",
 		"RUB",
 		"SAR",
 		"SEK",
 		"SGD",
-		"SSP",
 		"THB",
-		"TND",
 		"TRY",
-		"TTD",
 		"TWD",
 		"UAH",
-		"UGX",
-		"UYU",
-		"UZS",
-		"VES",
+		"VEF",
 		"VND",
-		"ZAR"
+		"ZAR",
+		"XDR",
+		"XAG",
+		"XAU",
+		"BITS",
+		"SATS"
 	];
 
 	$.each(myOptions, function (val, text) {

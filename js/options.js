@@ -1,75 +1,84 @@
 // dinhnluong@gmail.com
-// last updated : 02.11.2021
+// last updated : 02.16.2023
 
 let searchArray = [];
 let latestData = [];
 let arrFavsObj = [];
-let key = "";
-let keysList = ["b1c6a77d-29c5-40b5-bc3e-03f3780a17a4","cb5ec527-529f-4f75-8b22-20327e52195f"]
 
+let currentPage = 1;
+let coinsStorage = [];
 
-if (localStorage.getItem("keyToUse") !== null) {
-	key = keysList[Math.floor(Math.random()*keysList.length)];
-} else {
-	if (localStorage.getItem("keyToUse") == 'b1c6a77d-29c5-40b5-bc3e-03f3780a17a4') { 
-		key = 'cb5ec527-529f-4f75-8b22-20327e52195f'
-		} else {
-		key = 'b1c6a77d-29c5-40b5-bc3e-03f3780a17a4'
-	}
-}
-
-localStorage['keyToUse'] = key;
 
 $(document).ready(function () {
 
-	function start() {
-		
+	function start() {		
 		let milliseconds = (new Date).getTime();
 		if (localStorage.getItem("cryptoData") === null) {
 			getCMCData();
 		} else {
 			latestData = JSON.parse(localStorage['cryptoData']);
-			searchArray = [];
-			latestData.forEach(function (item, key) {
-				searchArray.push(item.name);
-			});
-			searchArray.shift();
-			orderPages(latestData);
-			if (latestData[0].updated === undefined || (latestData[0].updated + 604800000) <= milliseconds) {
+			if (latestData[0].updated === undefined || (latestData[0].updated + 604800000 ) <= milliseconds) {
 				getCMCData();
+			} else {
+				searchArray = [];
+				latestData.forEach(function (item, key) {
+					searchArray.push(item.name);
+				});
+				searchArray.shift();
+				orderPages(latestData);
 			}
+
 		}
 
 		function getCMCData() {
+			jQuery('#cryptoTable').html('');			
+			jQuery('#cryptoTable').html("<td><div class='spinner-grow' role='status'><span class='sr-only'>Loading...</span></div></td><td><h4>Loading...may take a few moments</h4></td>");
 			$.ajax({
 				type: "GET",
-				url: "https://ccointracker.herokuapp.com/https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
+				url: "https://api.coingecko.com/api/v3/coins/markets?",
 				dataType: "json",
 				data: {
-					start: 1,
-					limit: 5000,
-					convert: 'USD',
-					CMC_PRO_API_KEY: key
+					vs_currency: 'usd',
+					order: 'market_cap_desc',
+					per_page: 250,
+					page: currentPage,
+					sparkline: false
 				},
 				crossDomain: true,
 				success: function (data) {
-					data.data.unshift({
+				
+
+				
+
+				if (currentPage == 10) {
+					coinsStorage = coinsStorage.concat(data);
+					
+					coinsStorage.unshift({
 						updated: milliseconds
 					});
-					localStorage['cryptoData'] = JSON.stringify(data.data);
-					latestData = data.data;
+					
+					localStorage['cryptoData'] = JSON.stringify(coinsStorage);
+					latestData = coinsStorage;
 					searchArray = [];
-					data.data.forEach(function (item, key) {
+					coinsStorage.forEach(function (item, key) {
 						searchArray.push(item.name);
 					});
 					searchArray.shift();
 					orderPages(latestData);
+
+				} else {
+					coinsStorage = coinsStorage.concat(data);
+					currentPage++;
+					getCMCData();
+				}
+				
 				},
 			});
 		}
 	}
 
 	function orderPages(data) {
+	jQuery('#cryptoTable').html('');
 		function addToFavorites(favs) {
 			if (localStorage.getItem("arrFavsObj") !== null) {
 				arrFavsObj = JSON.parse(localStorage['arrFavsObj']);
@@ -90,10 +99,16 @@ $(document).ready(function () {
 
 		function displayFavs(displayTheseFavs) {
 			jQuery('#displayFavorites').html('');
-			for (i = 0; i < displayTheseFavs.length; i++) {
+			for (i = 0; i < displayTheseFavs.length; i++) {				
+				var ix = data.length;
+				while(ix--) {
+					if(displayTheseFavs[i].favsId == data[ix].id) {
+						break;
+					}
+				}				
 				b = document.createElement("TR");
-				b.innerHTML = "<td><img src=\"https://s2.coinmarketcap.com/static/img/coins/32x32/" + data[displayTheseFavs[i].storedFavs].id + ".png\"></td><td>"
-					 + data[displayTheseFavs[i].storedFavs].symbol + " - " + data[displayTheseFavs[i].storedFavs].name + "</td><td></td>";
+				b.innerHTML = "<td><img src=\"" + data[ix].image.replace("large", "small") + "\" style=\"max-height: 100%; max-width: 100%\"></td><td>"
+					 + data[ix].symbol.toUpperCase() + " - " + data[ix].name + "</td><td></td>";
 				b.innerHTML += "<input type='hidden' value='" + displayTheseFavs[i].storedFavs + "'>";
 				b.addEventListener("click", function (e) {
 					thisValue = this.getElementsByTagName("input")[0].value;
@@ -123,8 +138,8 @@ $(document).ready(function () {
 					if ((data[i].name).substr(0, val.length).toUpperCase() == val.toUpperCase() || (data[i].symbol).substr(0, val.length).toUpperCase() == val.toUpperCase()) {
 						x++;
 						b = document.createElement("TR");
-						b.innerHTML = "<td><img src=\"https://s2.coinmarketcap.com/static/img/coins/32x32/" + data[i].id + ".png\"></td>"
-						b.innerHTML += "<td align=\"center\">" + data[i].cmc_rank + "</td>";
+						b.innerHTML = "<td><img src=\"" + data[i].image.replace("large", "small") + "\" style=\"max-height: 100%; max-width: 100%\"></td>"
+						b.innerHTML += "<td align=\"center\">" + data[i].market_cap_rank + "</td>";
 						b.innerHTML += "<td>" + data[i].name + "</td>";
 
 						b.innerHTML += "<input type='hidden' value='" + (i) + "'>";
@@ -166,8 +181,8 @@ $(document).ready(function () {
 		function displayFirst100() {
 			for (let i = 1; i < 16; i++) {
 				b = document.createElement("TR");
-				b.innerHTML = "<td><img src=\"https://s2.coinmarketcap.com/static/img/coins/32x32/" + data[i].id + ".png\"></td>"
-				b.innerHTML += "<td align=\"center\">" + data[i].cmc_rank + "</td>";
+				b.innerHTML = "<td><img src=\"" + data[i].image.replace("large", "small") + "\" style=\"max-height: 100%; max-width: 100%\"></td>"
+				b.innerHTML += "<td align=\"center\">" + data[i].market_cap_rank + "</td>";
 				b.innerHTML += "<td>" + data[i].name + "</td>";
 
 				b.innerHTML += "<input type='hidden' value='" + (i) + "'>";
